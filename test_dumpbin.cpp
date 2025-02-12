@@ -43,6 +43,8 @@ inline umm append(StringBuilder &builder, Gpr16 r) { return append(builder, regn
 inline umm append(StringBuilder &builder, Gpr32 r) { return append(builder, regnames32[r.i]); }
 inline umm append(StringBuilder &builder, Gpr64 r) { return append(builder, regnames64[r.i]); }
 inline umm append(StringBuilder &builder, Xmm r) { return append_format(builder, "xmm{}", r.i); }
+inline umm append(StringBuilder &builder, Ymm r) { return append_format(builder, "ymm{}", r.i); }
+inline umm append(StringBuilder &builder, Zmm r) { return append_format(builder, "zmm{}", r.i); }
 
 inline umm append(StringBuilder &builder, Mem m) {
 	umm result = 0;
@@ -201,7 +203,7 @@ void write_instructions_to_obj(Span<u8> instructions, Span<utf8> filename) {
     write_entire_file(filename, bytes);
 }
 
-using Operand = Variant<Gpr8, Gpr16, Gpr32, Gpr64, Xmm, Mem, s64>;
+using Operand = Variant<Gpr8, Gpr16, Gpr32, Gpr64, Xmm, Ymm, Zmm, Mem, s64>;
 		
 struct InstrDesc {
 	String mnemonic;
@@ -239,7 +241,7 @@ Optional<InstrDesc> parse_dumpbin_disasm_line(String line) {
 	line.set_begin(first_space);
 	line = trim(line, [](auto x) { return is_whitespace((ascii)x); });
 
-	auto parse_any_register = [&]() -> Variant<Empty, Gpr8, Gpr16, Gpr32, Gpr64, Xmm> {
+	auto parse_any_register = [&]() -> Variant<Empty, Gpr8, Gpr16, Gpr32, Gpr64, Xmm, Ymm, Zmm> {
 		
 		switch (*(u64 *)line.data & 0xffffffffff) {
 			case 'x' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'0'<<32): line.data += 5; line.count -= 5; return xmm10;
@@ -248,6 +250,18 @@ Optional<InstrDesc> parse_dumpbin_disasm_line(String line) {
 			case 'x' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'3'<<32): line.data += 5; line.count -= 5; return xmm13;
 			case 'x' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'4'<<32): line.data += 5; line.count -= 5; return xmm14;
 			case 'x' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'5'<<32): line.data += 5; line.count -= 5; return xmm15;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'0'<<32): line.data += 5; line.count -= 5; return ymm10;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'1'<<32): line.data += 5; line.count -= 5; return ymm11;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'2'<<32): line.data += 5; line.count -= 5; return ymm12;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'3'<<32): line.data += 5; line.count -= 5; return ymm13;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'4'<<32): line.data += 5; line.count -= 5; return ymm14;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'5'<<32): line.data += 5; line.count -= 5; return ymm15;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'0'<<32): line.data += 5; line.count -= 5; return zmm10;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'1'<<32): line.data += 5; line.count -= 5; return zmm11;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'2'<<32): line.data += 5; line.count -= 5; return zmm12;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'3'<<32): line.data += 5; line.count -= 5; return zmm13;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'4'<<32): line.data += 5; line.count -= 5; return zmm14;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('1'<<24) | ((u64)'5'<<32): line.data += 5; line.count -= 5; return zmm15;
 		}
 		switch (*(u32 *)line.data) {
 			case 'r' | ('1'<<8) | ('0'<<16) | ('b'<<24): line.data += 4; line.count -= 4; return r10b;
@@ -278,6 +292,26 @@ Optional<InstrDesc> parse_dumpbin_disasm_line(String line) {
 			case 'x' | ('m'<<8) | ('m'<<16) | ('7'<<24): line.data += 4; line.count -= 4; return xmm7;
 			case 'x' | ('m'<<8) | ('m'<<16) | ('8'<<24): line.data += 4; line.count -= 4; return xmm8;
 			case 'x' | ('m'<<8) | ('m'<<16) | ('9'<<24): line.data += 4; line.count -= 4; return xmm9;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('0'<<24): line.data += 4; line.count -= 4; return ymm0;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('1'<<24): line.data += 4; line.count -= 4; return ymm1;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('2'<<24): line.data += 4; line.count -= 4; return ymm2;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('3'<<24): line.data += 4; line.count -= 4; return ymm3;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('4'<<24): line.data += 4; line.count -= 4; return ymm4;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('5'<<24): line.data += 4; line.count -= 4; return ymm5;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('6'<<24): line.data += 4; line.count -= 4; return ymm6;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('7'<<24): line.data += 4; line.count -= 4; return ymm7;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('8'<<24): line.data += 4; line.count -= 4; return ymm8;
+			case 'y' | ('m'<<8) | ('m'<<16) | ('9'<<24): line.data += 4; line.count -= 4; return ymm9;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('0'<<24): line.data += 4; line.count -= 4; return zmm0;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('1'<<24): line.data += 4; line.count -= 4; return zmm1;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('2'<<24): line.data += 4; line.count -= 4; return zmm2;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('3'<<24): line.data += 4; line.count -= 4; return zmm3;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('4'<<24): line.data += 4; line.count -= 4; return zmm4;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('5'<<24): line.data += 4; line.count -= 4; return zmm5;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('6'<<24): line.data += 4; line.count -= 4; return zmm6;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('7'<<24): line.data += 4; line.count -= 4; return zmm7;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('8'<<24): line.data += 4; line.count -= 4; return zmm8;
+			case 'z' | ('m'<<8) | ('m'<<16) | ('9'<<24): line.data += 4; line.count -= 4; return zmm9;
 		}
 
 		switch (*(u32 *)line.data & 0xffffff) {
@@ -367,13 +401,13 @@ Optional<InstrDesc> parse_dumpbin_disasm_line(String line) {
 				[&](Gpr64) {size = 8;},
 			});
 		} else if (
-			(starts_with(line, u8"byte ptr ["s) && (line.set_begin(line.begin() + 10), true)) ||
-			(starts_with(line, u8"word ptr ["s) && (line.set_begin(line.begin() + 10), true)) ||
-			(starts_with(line, u8"dword ptr ["s) && (line.set_begin(line.begin() + 11), true)) ||
-			(starts_with(line, u8"qword ptr ["s) && (line.set_begin(line.begin() + 11), true)) ||
-			(starts_with(line, u8"xmmword ptr ["s) && (line.set_begin(line.begin() + 13), true)) ||
-			(starts_with(line, u8"ymmword ptr ["s) && (line.set_begin(line.begin() + 13), true)) ||
-			(starts_with(line, u8"zmmword ptr ["s) && (line.set_begin(line.begin() + 13), true))
+			(starts_with(line, u8"byte ptr ["s) && (line.set_begin(line.begin() + 10), size = 1, true)) ||
+			(starts_with(line, u8"word ptr ["s) && (line.set_begin(line.begin() + 10), size = 2, true)) ||
+			(starts_with(line, u8"dword ptr ["s) && (line.set_begin(line.begin() + 11), size = 4, true)) ||
+			(starts_with(line, u8"qword ptr ["s) && (line.set_begin(line.begin() + 11), size = 8, true)) ||
+			(starts_with(line, u8"xmmword ptr ["s) && (line.set_begin(line.begin() + 13), size = 16, true)) ||
+			(starts_with(line, u8"ymmword ptr ["s) && (line.set_begin(line.begin() + 13), size = 32, true)) ||
+			(starts_with(line, u8"zmmword ptr ["s) && (line.set_begin(line.begin() + 13), size = 64, true))
 		) {
 			Mem m = {};
 
@@ -485,48 +519,57 @@ s32 tl_main(Span<String> args) {
 		return 1;
 	}
 
+	#define ALL_PERMUTATIONS 0
+
+	#if ALL_PERMUTATIONS
 	Array regs8  {al, cl, dl, bl, ah, ch, dh, bh, r8b,r9b,r10b,r11b,r12b,r13b,r14b,r15b,spl,bpl,sil,dil,};
 	Array regs16 {ax, cx, dx, bx, sp, bp, si, di, r8w,r9w,r10w,r11w,r12w,r13w,r14w,r15w,};
 	Array regs32 {eax,ecx,edx,ebx,esp,ebp,esi,edi,r8d,r9d,r10d,r11d,r12d,r13d,r14d,r15d,};
 	Array regs64 {rax,rcx,rdx,rbx,rsp,rbp,rsi,rdi,r8, r9, r10, r11, r12, r13, r14, r15,};
 	Array xmms {xmm0,xmm1,xmm2,xmm3,xmm4,xmm5,xmm6,xmm7,xmm8,xmm9,xmm10,xmm11,xmm12,xmm13,xmm14,xmm15};
-
-	u8 *c = buf;
+	Array ymms {ymm0,ymm1,ymm2,ymm3,ymm4,ymm5,ymm6,ymm7,ymm8,ymm9,ymm10,ymm11,ymm12,ymm13,ymm14,ymm15};
+	Array zmms {zmm0,zmm1,zmm2,zmm3,zmm4,zmm5,zmm6,zmm7,zmm8,zmm9,zmm10,zmm11,zmm12,zmm13,zmm14,zmm15};
+	#else
+	Array regs8  {al,ah,r8b,spl,bpl};
+	Array regs16 {ax,sp,bp,r8w};
+	Array regs32 {eax,esp,ebp,r8d};
+	Array regs64 {rax,rsp,rbp,r8 };
+	Array xmms {xmm0,xmm8};
+	Array ymms {ymm0,ymm8};
+	Array zmms {zmm0,zmm8};
+	#endif
 			
-	List<InstrInfo> instr_infos;
-
 	List<Mem> mems;
-			
 	mems.add(mem64_d(0x34));
 	mems.add(mem64_d(0x3456));
-	for (u8 i = 0; i < 16; ++i) mems.add(mem64_b((Gpr64{i})));
-	for (u8 i = 0; i < 16; ++i) mems.add(mem64_bd((Gpr64{i}), 0x34));	
-	for (u8 i = 0; i < 16; ++i) mems.add(mem64_bd((Gpr64{i}), 0x3456));	
-	for (u8 i = 0; i < 16; ++i) if (i != 4) mems.add(mem64_i((Gpr64{i}), 1));
-	for (u8 i = 0; i < 16; ++i) if (i != 4) mems.add(mem64_i((Gpr64{i}), 2));
-	for (u8 i = 0; i < 16; ++i) if (i != 4) mems.add(mem64_i((Gpr64{i}), 4));
-	for (u8 i = 0; i < 16; ++i) if (i != 4) mems.add(mem64_i((Gpr64{i}), 8));
-	for (u8 i = 0; i < 16; ++i) if (i != 4) mems.add(mem64_id((Gpr64{i}), 1, 0x34));
-	for (u8 i = 0; i < 16; ++i) if (i != 4) mems.add(mem64_id((Gpr64{i}), 2, 0x34));
-	for (u8 i = 0; i < 16; ++i) if (i != 4) mems.add(mem64_id((Gpr64{i}), 4, 0x34));
-	for (u8 i = 0; i < 16; ++i) if (i != 4) mems.add(mem64_id((Gpr64{i}), 8, 0x34));
-	for (u8 i = 0; i < 16; ++i) if (i != 4) mems.add(mem64_id((Gpr64{i}), 1, 0x3456));
-	for (u8 i = 0; i < 16; ++i) if (i != 4) mems.add(mem64_id((Gpr64{i}), 2, 0x3456));
-	for (u8 i = 0; i < 16; ++i) if (i != 4) mems.add(mem64_id((Gpr64{i}), 4, 0x3456));
-	for (u8 i = 0; i < 16; ++i) if (i != 4) mems.add(mem64_id((Gpr64{i}), 8, 0x3456));
-	for (u8 i = 0; i < 16; ++i) for (u8 j = 0; j < 16; ++j) if (j != 4) mems.add(mem64_bi((Gpr64{i}), (Gpr64{j}), 1));
-	for (u8 i = 0; i < 16; ++i) for (u8 j = 0; j < 16; ++j) if (j != 4) mems.add(mem64_bi((Gpr64{i}), (Gpr64{j}), 2));
-	for (u8 i = 0; i < 16; ++i) for (u8 j = 0; j < 16; ++j) if (j != 4) mems.add(mem64_bi((Gpr64{i}), (Gpr64{j}), 4));
-	for (u8 i = 0; i < 16; ++i) for (u8 j = 0; j < 16; ++j) if (j != 4) mems.add(mem64_bi((Gpr64{i}), (Gpr64{j}), 8));
-	for (u8 i = 0; i < 16; ++i) for (u8 j = 0; j < 16; ++j) if (j != 4) mems.add(mem64_bid((Gpr64{i}), (Gpr64{j}), 1, 0x34));
-	for (u8 i = 0; i < 16; ++i) for (u8 j = 0; j < 16; ++j) if (j != 4) mems.add(mem64_bid((Gpr64{i}), (Gpr64{j}), 2, 0x34));
-	for (u8 i = 0; i < 16; ++i) for (u8 j = 0; j < 16; ++j) if (j != 4) mems.add(mem64_bid((Gpr64{i}), (Gpr64{j}), 4, 0x34));
-	for (u8 i = 0; i < 16; ++i) for (u8 j = 0; j < 16; ++j) if (j != 4) mems.add(mem64_bid((Gpr64{i}), (Gpr64{j}), 8, 0x34));
-	for (u8 i = 0; i < 16; ++i) for (u8 j = 0; j < 16; ++j) if (j != 4) mems.add(mem64_bid((Gpr64{i}), (Gpr64{j}), 1, 0x3456));
-	for (u8 i = 0; i < 16; ++i) for (u8 j = 0; j < 16; ++j) if (j != 4) mems.add(mem64_bid((Gpr64{i}), (Gpr64{j}), 2, 0x3456));
-	for (u8 i = 0; i < 16; ++i) for (u8 j = 0; j < 16; ++j) if (j != 4) mems.add(mem64_bid((Gpr64{i}), (Gpr64{j}), 4, 0x3456));
-	for (u8 i = 0; i < 16; ++i) for (u8 j = 0; j < 16; ++j) if (j != 4) mems.add(mem64_bid((Gpr64{i}), (Gpr64{j}), 8, 0x3456));
-			
+	for (auto i : regs64) mems.add(mem64_b(i));
+	for (auto i : regs64) mems.add(mem64_bd(i, 0x34));	
+	for (auto i : regs64) mems.add(mem64_bd(i, 0x3456));	
+	for (auto i : regs64) if (i.i != 4) mems.add(mem64_i(i, 1));
+	for (auto i : regs64) if (i.i != 4) mems.add(mem64_i(i, 2));
+	for (auto i : regs64) if (i.i != 4) mems.add(mem64_i(i, 4));
+	for (auto i : regs64) if (i.i != 4) mems.add(mem64_i(i, 8));
+	for (auto i : regs64) if (i.i != 4) mems.add(mem64_id(i, 1, 0x34));
+	for (auto i : regs64) if (i.i != 4) mems.add(mem64_id(i, 2, 0x34));
+	for (auto i : regs64) if (i.i != 4) mems.add(mem64_id(i, 4, 0x34));
+	for (auto i : regs64) if (i.i != 4) mems.add(mem64_id(i, 8, 0x34));
+	for (auto i : regs64) if (i.i != 4) mems.add(mem64_id(i, 1, 0x3456));
+	for (auto i : regs64) if (i.i != 4) mems.add(mem64_id(i, 2, 0x3456));
+	for (auto i : regs64) if (i.i != 4) mems.add(mem64_id(i, 4, 0x3456));
+	for (auto i : regs64) if (i.i != 4) mems.add(mem64_id(i, 8, 0x3456));
+	for (auto i : regs64) for (auto j : regs64) if (j.i != 4) mems.add(mem64_bi(i, j, 1));
+	for (auto i : regs64) for (auto j : regs64) if (j.i != 4) mems.add(mem64_bi(i, j, 2));
+	for (auto i : regs64) for (auto j : regs64) if (j.i != 4) mems.add(mem64_bi(i, j, 4));
+	for (auto i : regs64) for (auto j : regs64) if (j.i != 4) mems.add(mem64_bi(i, j, 8));
+	for (auto i : regs64) for (auto j : regs64) if (j.i != 4) mems.add(mem64_bid(i, j, 1, 0x34));
+	for (auto i : regs64) for (auto j : regs64) if (j.i != 4) mems.add(mem64_bid(i, j, 2, 0x34));
+	for (auto i : regs64) for (auto j : regs64) if (j.i != 4) mems.add(mem64_bid(i, j, 4, 0x34));
+	for (auto i : regs64) for (auto j : regs64) if (j.i != 4) mems.add(mem64_bid(i, j, 8, 0x34));
+	for (auto i : regs64) for (auto j : regs64) if (j.i != 4) mems.add(mem64_bid(i, j, 1, 0x3456));
+	for (auto i : regs64) for (auto j : regs64) if (j.i != 4) mems.add(mem64_bid(i, j, 2, 0x3456));
+	for (auto i : regs64) for (auto j : regs64) if (j.i != 4) mems.add(mem64_bid(i, j, 4, 0x3456));
+	for (auto i : regs64) for (auto j : regs64) if (j.i != 4) mems.add(mem64_bid(i, j, 8, 0x3456));
+
 	{
 		umm count = mems.count;
 		for (umm i = 0; i < count; ++i) {
@@ -548,6 +591,10 @@ s32 tl_main(Span<String> args) {
 	}
 			
 	println("Encoding...");
+	
+	u8 *c = buf;
+			
+	List<InstrInfo> instr_infos;
 
 	StringBuilder ml64_builder;
 	append(ml64_builder, ".code\nmain proc\n");
@@ -639,6 +686,11 @@ s32 tl_main(Span<String> args) {
 	#define TEST_XX(name) for (auto a : xmms) for (auto b : xmms) test(u8###name##s, 128, name##_xx, a, b);
 	#define TEST_XM(name) for (auto a : xmms) for (auto b : mems) test(u8###name##s, 128, name##_xm, a, b);
 	#define TEST_XXX(name) for (auto a : xmms) for (auto b : xmms) for (auto c : xmms) test(u8###name##s, 128, name##_xxx, a, b, c);
+	#define TEST_XXM(name) for (auto a : xmms) for (auto b : xmms) for (auto c : mems) test(u8###name##s, 128, name##_xxm, a, b, c);
+	#define TEST_YYY(name) for (auto a : ymms) for (auto b : ymms) for (auto c : ymms) test(u8###name##s, 256, name##_yyy, a, b, c);
+	#define TEST_YYM(name) for (auto a : ymms) for (auto b : ymms) for (auto c : mems) test(u8###name##s, 256, name##_yym, a, b, c);
+	#define TEST_ZZZ(name) for (auto a : zmms) for (auto b : zmms) for (auto c : zmms) test(u8###name##s, 256, name##_zzz, a, b, c);
+	#define TEST_ZZM(name) for (auto a : zmms) for (auto b : zmms) for (auto c : mems) test(u8###name##s, 256, name##_zzm, a, b, c);
 			
 	#define TEST_R(name) \
 		TEST_R8(name) \
@@ -686,17 +738,17 @@ s32 tl_main(Span<String> args) {
 		TEST_MR32(name) \
 		TEST_MR64(name) \
 
-	// TEST_RI(add);
-	// TEST_RR(add);
-	// TEST_RM(add);
-	// TEST_MI(add);
-	// TEST_MR(add);
-	// TEST_RI16_8(add);
-	// TEST_RI32_8(add);
-	// TEST_RI64_8(add);
-	// TEST_MI16_8(add);
-	// TEST_MI32_8(add);
-	// TEST_MI64_8(add);
+	TEST_RI(add);
+	TEST_RR(add);
+	TEST_RM(add);
+	TEST_MI(add);
+	TEST_MR(add);
+	TEST_RI16_8(add);
+	TEST_RI32_8(add);
+	TEST_RI64_8(add);
+	TEST_MI16_8(add);
+	TEST_MI32_8(add);
+	TEST_MI64_8(add);
 
 	//TEST_RI8(mov)
 	//TEST_RI16(mov)
@@ -706,7 +758,13 @@ s32 tl_main(Span<String> args) {
 	//TEST_XX(addpd);
 	//TEST_XM(addpd);
 
-	TEST_XXX(vaddpd);
+	//TEST_XXX(vaddpd);
+	//TEST_XXM(vaddpd);
+	//TEST_YYY(vaddpd);
+	//TEST_YYM(vaddpd);
+	//TEST_ZZZ(vaddpd);
+	//TEST_ZZM(vaddpd);
+
 	//test(u8"vaddpd"s, 128, vaddpd_xxx, xmm0, xmm0, xmm0);
 	//test(u8"vaddpd"s, 128, vaddpd_xxx, xmm8, xmm0, xmm0);
 	//test(u8"vaddpd"s, 128, vaddpd_xxx, xmm0, xmm8, xmm0);
@@ -734,12 +792,12 @@ s32 tl_main(Span<String> args) {
 	write_instructions_to_obj(Span(buf, (umm)(c - buf)), my_obj_path);
 	
 	append(ml64_builder, "main endp\nend");
-	println("Assembling...");
+	println("Running ml64...");
 	write_entire_file(asm_path, ml64_builder);
 	wait(start_process(tformat(u8"{}\\ml64.exe /Fo {} /c {}"s, msvc_path, ml64_obj_path, asm_path)));
 	auto assembled_obj = read_entire_file(ml64_obj_path);
 
-	println("Disassembling...");
+	println("Running dumpbin /disasm...");
 
 	auto disasm_output = (String)start_process_and_get_output(tformat(u8"{}\\dumpbin.exe /disasm:nobytes /nologo {}"s, msvc_path, my_obj_path));
 	

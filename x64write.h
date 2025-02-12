@@ -30,7 +30,7 @@ focused on static typechecking.
 
 	By default all of the input is validated. If encoding is successful, return value is 0,
 	otherwise it's a message describing the error. You can:
-#define X64W_VALIDATE(condition, message) do { if (!(condition)) return message; } while (0)
+#define X64W_VALIDATE(condition, message) do { if (!(condition)) { *c = restore; return message; } } while (0)
 	To override default validation check. Here you can insert logging and whatnot.
 	
 	Example (no prefixes):
@@ -204,6 +204,90 @@ typedef struct { uint8_t i; } x64w_Xmm;
 #define x64w_xmm13 (X64W_LIT(x64w_Xmm) { 0x0d })
 #define x64w_xmm14 (X64W_LIT(x64w_Xmm) { 0x0e })
 #define x64w_xmm15 (X64W_LIT(x64w_Xmm) { 0x0f })
+#define x64w_xmm16 (X64W_LIT(x64w_Xmm) { 0x10 })
+#define x64w_xmm17 (X64W_LIT(x64w_Xmm) { 0x11 })
+#define x64w_xmm18 (X64W_LIT(x64w_Xmm) { 0x12 })
+#define x64w_xmm19 (X64W_LIT(x64w_Xmm) { 0x13 })
+#define x64w_xmm20 (X64W_LIT(x64w_Xmm) { 0x14 })
+#define x64w_xmm21 (X64W_LIT(x64w_Xmm) { 0x15 })
+#define x64w_xmm22 (X64W_LIT(x64w_Xmm) { 0x16 })
+#define x64w_xmm23 (X64W_LIT(x64w_Xmm) { 0x17 })
+#define x64w_xmm24 (X64W_LIT(x64w_Xmm) { 0x18 })
+#define x64w_xmm25 (X64W_LIT(x64w_Xmm) { 0x19 })
+#define x64w_xmm26 (X64W_LIT(x64w_Xmm) { 0x1a })
+#define x64w_xmm27 (X64W_LIT(x64w_Xmm) { 0x1b })
+#define x64w_xmm28 (X64W_LIT(x64w_Xmm) { 0x1c })
+#define x64w_xmm29 (X64W_LIT(x64w_Xmm) { 0x1d })
+#define x64w_xmm30 (X64W_LIT(x64w_Xmm) { 0x1e })
+#define x64w_xmm31 (X64W_LIT(x64w_Xmm) { 0x1f })
+
+typedef struct { uint8_t i; } x64w_Ymm;
+#define x64w_ymm0  (X64W_LIT(x64w_Ymm) { 0x00 })
+#define x64w_ymm1  (X64W_LIT(x64w_Ymm) { 0x01 })
+#define x64w_ymm2  (X64W_LIT(x64w_Ymm) { 0x02 })
+#define x64w_ymm3  (X64W_LIT(x64w_Ymm) { 0x03 })
+#define x64w_ymm4  (X64W_LIT(x64w_Ymm) { 0x04 })
+#define x64w_ymm5  (X64W_LIT(x64w_Ymm) { 0x05 })
+#define x64w_ymm6  (X64W_LIT(x64w_Ymm) { 0x06 })
+#define x64w_ymm7  (X64W_LIT(x64w_Ymm) { 0x07 })
+#define x64w_ymm8  (X64W_LIT(x64w_Ymm) { 0x08 })
+#define x64w_ymm9  (X64W_LIT(x64w_Ymm) { 0x09 })
+#define x64w_ymm10 (X64W_LIT(x64w_Ymm) { 0x0a })
+#define x64w_ymm11 (X64W_LIT(x64w_Ymm) { 0x0b })
+#define x64w_ymm12 (X64W_LIT(x64w_Ymm) { 0x0c })
+#define x64w_ymm13 (X64W_LIT(x64w_Ymm) { 0x0d })
+#define x64w_ymm14 (X64W_LIT(x64w_Ymm) { 0x0e })
+#define x64w_ymm15 (X64W_LIT(x64w_Ymm) { 0x0f })
+#define x64w_ymm16 (X64W_LIT(x64w_Ymm) { 0x10 })
+#define x64w_ymm17 (X64W_LIT(x64w_Ymm) { 0x11 })
+#define x64w_ymm18 (X64W_LIT(x64w_Ymm) { 0x12 })
+#define x64w_ymm19 (X64W_LIT(x64w_Ymm) { 0x13 })
+#define x64w_ymm20 (X64W_LIT(x64w_Ymm) { 0x14 })
+#define x64w_ymm21 (X64W_LIT(x64w_Ymm) { 0x15 })
+#define x64w_ymm22 (X64W_LIT(x64w_Ymm) { 0x16 })
+#define x64w_ymm23 (X64W_LIT(x64w_Ymm) { 0x17 })
+#define x64w_ymm24 (X64W_LIT(x64w_Ymm) { 0x18 })
+#define x64w_ymm25 (X64W_LIT(x64w_Ymm) { 0x19 })
+#define x64w_ymm26 (X64W_LIT(x64w_Ymm) { 0x1a })
+#define x64w_ymm27 (X64W_LIT(x64w_Ymm) { 0x1b })
+#define x64w_ymm28 (X64W_LIT(x64w_Ymm) { 0x1c })
+#define x64w_ymm29 (X64W_LIT(x64w_Ymm) { 0x1d })
+#define x64w_ymm30 (X64W_LIT(x64w_Ymm) { 0x1e })
+#define x64w_ymm31 (X64W_LIT(x64w_Ymm) { 0x1f })
+
+typedef struct { uint8_t i; } x64w_Zmm;
+#define x64w_zmm0  (X64W_LIT(x64w_Zmm) { 0x00 })
+#define x64w_zmm1  (X64W_LIT(x64w_Zmm) { 0x01 })
+#define x64w_zmm2  (X64W_LIT(x64w_Zmm) { 0x02 })
+#define x64w_zmm3  (X64W_LIT(x64w_Zmm) { 0x03 })
+#define x64w_zmm4  (X64W_LIT(x64w_Zmm) { 0x04 })
+#define x64w_zmm5  (X64W_LIT(x64w_Zmm) { 0x05 })
+#define x64w_zmm6  (X64W_LIT(x64w_Zmm) { 0x06 })
+#define x64w_zmm7  (X64W_LIT(x64w_Zmm) { 0x07 })
+#define x64w_zmm8  (X64W_LIT(x64w_Zmm) { 0x08 })
+#define x64w_zmm9  (X64W_LIT(x64w_Zmm) { 0x09 })
+#define x64w_zmm10 (X64W_LIT(x64w_Zmm) { 0x0a })
+#define x64w_zmm11 (X64W_LIT(x64w_Zmm) { 0x0b })
+#define x64w_zmm12 (X64W_LIT(x64w_Zmm) { 0x0c })
+#define x64w_zmm13 (X64W_LIT(x64w_Zmm) { 0x0d })
+#define x64w_zmm14 (X64W_LIT(x64w_Zmm) { 0x0e })
+#define x64w_zmm15 (X64W_LIT(x64w_Zmm) { 0x0f })
+#define x64w_zmm16 (X64W_LIT(x64w_Zmm) { 0x10 })
+#define x64w_zmm17 (X64W_LIT(x64w_Zmm) { 0x11 })
+#define x64w_zmm18 (X64W_LIT(x64w_Zmm) { 0x12 })
+#define x64w_zmm19 (X64W_LIT(x64w_Zmm) { 0x13 })
+#define x64w_zmm20 (X64W_LIT(x64w_Zmm) { 0x14 })
+#define x64w_zmm21 (X64W_LIT(x64w_Zmm) { 0x15 })
+#define x64w_zmm22 (X64W_LIT(x64w_Zmm) { 0x16 })
+#define x64w_zmm23 (X64W_LIT(x64w_Zmm) { 0x17 })
+#define x64w_zmm24 (X64W_LIT(x64w_Zmm) { 0x18 })
+#define x64w_zmm25 (X64W_LIT(x64w_Zmm) { 0x19 })
+#define x64w_zmm26 (X64W_LIT(x64w_Zmm) { 0x1a })
+#define x64w_zmm27 (X64W_LIT(x64w_Zmm) { 0x1b })
+#define x64w_zmm28 (X64W_LIT(x64w_Zmm) { 0x1c })
+#define x64w_zmm29 (X64W_LIT(x64w_Zmm) { 0x1d })
+#define x64w_zmm30 (X64W_LIT(x64w_Zmm) { 0x1e })
+#define x64w_zmm31 (X64W_LIT(x64w_Zmm) { 0x1f })
 
 // Use x64w_mem_* macros to construct this.
 // This will ensure correct initialization.
@@ -439,7 +523,7 @@ x64w_Result x64w_add_mr64  (uint8_t **c, x64w_Mem d, x64w_Gpr64 s);
 #define X64W_GPR8_NEEDS_REX(gpr) (!!((gpr) & 0x10))
 
 #ifndef X64W_VALIDATE
-#define X64W_VALIDATE(condition, message) do { if (!(condition)) return message; } while (0)
+#define X64W_VALIDATE(condition, message) do { if (!(condition)) { *c = restore; return message; } } while (0)
 #endif
 
 bool x64w_gpr8_compatible_rr(x64w_Gpr8 a, x64w_Gpr8 b) {
@@ -461,9 +545,9 @@ bool x64w_gpr8_compatible_rm(x64w_Gpr8 a, x64w_Mem b) {
 #define X64W_VALIDATE_R(r)                                                           \
 	do {                                                                             \
 		if (size == 1) {                                                             \
-			X64W_VALIDATE(r < 0x10 || (0x14 <= r && r < 0x18), "invalid 8-bit gpr"); \
+			X64W_VALIDATE(r < 0x10 || (0x14 <= r && r < 0x18), "invalid register");  \
 		} else {                                                                     \
-			X64W_VALIDATE(r < 0x10, "invalid gpr");                                  \
+			X64W_VALIDATE(r < 0x10, "invalid register");                             \
 		}                                                                            \
 	} while (0)
 
@@ -504,6 +588,12 @@ bool x64w_gpr8_compatible_rm(x64w_Gpr8 a, x64w_Mem b) {
 			X64W_VALIDATE(x64w_gpr8_compatible_rm(X64W_LIT(x64w_Gpr8){r}, m), \
 				"ah,ch,dh,bh cannot be used with r8-15,spl,bpl,sil,dil");     \
 		}                                                                     \
+	} while (0)
+
+#define X64W_VALIDATE_X(x)                                           \
+	do {                                                             \
+		if (size == 64) X64W_VALIDATE(x < 0x10, "invalid register"); \
+		else            X64W_VALIDATE(x < 0x20, "invalid register"); \
 	} while (0)
 
 #endif
@@ -595,6 +685,19 @@ static void write_vex3(uint8_t **c, bool r, bool x, bool b, uint8_t m, bool w, u
 	*(*c)++ = (!r << 7) | (!x << 6) | (!b << 5) | m;
 	*(*c)++ = (!w << 7) | ((v ^ 0xf) << 3) | (l << 2) | p;
 }
+static void write_vex(uint8_t **c, bool r, bool x, bool b, uint8_t m, bool w, uint8_t v, bool l, uint8_t p) {
+	if (x | b | w) {
+		write_vex3(c, r, x, b, m, w, v, l, p);
+	} else {
+		write_vex2(c, r, v, l, p);
+	}
+}
+static void write_evex(uint8_t **c, bool R, bool X, bool B, bool Rh, uint8_t m, bool W, uint8_t v, uint8_t p, bool z, uint8_t L, bool b, bool vh, uint8_t a) {
+	*(*c)++ = 0x62;
+	*(*c)++ = (!R << 7) | (!X << 6) | (!B << 5) | (!Rh << 4) | m;
+	*(*c)++ = (W << 7) | ((v ^ 0xf) << 3) | 0x04 | p;
+	*(*c)++ = (z << 7) | (L << 5) | (b << 4) | (!vh << 3) | a;
+}
 static void write_opcode(uint8_t **c, uint32_t opcode) {
 	if (opcode <= 0xff) {
 		*(*c)++ = opcode;
@@ -680,6 +783,7 @@ static instr_inline x64w_Result instr_i4(uint8_t **c, int32_t i, uint32_t opcode
 	return 0;
 }
 static instr_inline x64w_Result instr_r(uint8_t **c, uint8_t r, unsigned size, uint32_t opcode, uint8_t mod, uint64_t flags) {
+	uint8_t *restore = *c;
 	X64W_VALIDATE_R(r);
 
 	mod <<= 3;
@@ -705,6 +809,7 @@ static instr_inline x64w_Result instr_r(uint8_t **c, uint8_t r, unsigned size, u
 	return 0;
 }
 static instr_inline x64w_Result instr_ri(uint8_t **c, uint8_t r, int64_t i, unsigned size, uint32_t opcode, uint8_t mod, uint64_t flags) {
+	uint8_t *restore = *c;
 	X64W_VALIDATE_R(r);
 
 	mod <<= 3;
@@ -732,6 +837,7 @@ static instr_inline x64w_Result instr_ri(uint8_t **c, uint8_t r, int64_t i, unsi
 	return 0;
 }
 static instr_inline x64w_Result instr_m(uint8_t **c, x64w_Mem d, uint32_t opcode, uint8_t mod, uint64_t flags) {
+	uint8_t *restore = *c;
 	X64W_VALIDATE_M(d);
 	
 	mod <<= 3;
@@ -759,6 +865,7 @@ static instr_inline x64w_Result instr_m(uint8_t **c, x64w_Mem d, uint32_t opcode
 	return 0;
 }
 static instr_inline x64w_Result instr_rr(uint8_t **c, uint8_t d, uint8_t s, unsigned size, uint32_t opcode, uint64_t flags) {
+	uint8_t *restore = *c;
 	X64W_VALIDATE_RR(d, s);
 	
 	unsigned rexw          = !!(flags & REXW);
@@ -779,6 +886,7 @@ static instr_inline x64w_Result instr_rr(uint8_t **c, uint8_t d, uint8_t s, unsi
 	return 0;
 }
 static instr_inline x64w_Result instr_rm(uint8_t **c, uint8_t r, x64w_Mem m, unsigned size, uint32_t opcode, uint64_t flags) {
+	uint8_t *restore = *c;
 	X64W_VALIDATE_RM(r, m);
 	
 	unsigned rexw          = !!(flags & REXW);
@@ -806,6 +914,7 @@ static instr_inline x64w_Result instr_rm(uint8_t **c, uint8_t r, x64w_Mem m, uns
 	return 0;
 }
 static instr_inline x64w_Result instr_mi(uint8_t **c, x64w_Mem m, int64_t i, unsigned size, uint32_t opcode, uint8_t mod, uint64_t flags) {
+	uint8_t *restore = *c;
 	X64W_VALIDATE_M(m);
 	
 	mod <<= 3;
@@ -834,6 +943,90 @@ static instr_inline x64w_Result instr_mi(uint8_t **c, x64w_Mem m, int64_t i, uns
 
 	return 0;
 }
+static instr_inline x64w_Result instr_xxx(uint8_t **c, uint8_t d, uint8_t a, uint8_t b, unsigned size, uint32_t opcode) {
+	uint8_t *restore = *c;
+	X64W_VALIDATE_X(d);
+	X64W_VALIDATE_X(a);
+	X64W_VALIDATE_X(b);
+	
+	unsigned rexr = !!(d & 8);
+	unsigned rexb = !!(b & 8);
+	unsigned rexrh = !!(d & 16);
+	
+	if (size == 64) {
+		write_evex(c, rexr, 0, rexb, rexrh, vex_m_0f, 1, a & 15, vex_p_66, 0, 2, 0, !!(a & 16), 0);
+	} else {
+		write_vex(c, rexr, 0, rexb, vex_m_0f, 0, a, size == 32, vex_p_66);
+	}
+
+	write_opcode(c, 0x58);
+
+	*(*c)++ = 0xc0 | (b & 7) | ((d & 7) << 3);
+
+	return 0;
+}
+static instr_inline x64w_Result instr_xxm(uint8_t **c, uint8_t d, uint8_t a, x64w_Mem b, unsigned size, uint32_t opcode) {
+	uint8_t *restore = *c;
+	X64W_VALIDATE_X(d);
+	X64W_VALIDATE_X(a);
+	X64W_VALIDATE_M(b);
+
+	unsigned r7 = d & 7;
+	unsigned b7 = b.base & 7;
+	unsigned i7 = b.index & 7;
+	unsigned rexb = b.base >> 3;
+	unsigned rexi = b.index >> 3;
+	unsigned rexr = !!(d & 8);
+	unsigned rexrh = !!(d & 16);
+	
+	**c = 0x67;
+	*c += b.size_override;
+
+	if (size == 64) {
+		write_evex(c, rexr, rexi, rexb, rexrh, vex_m_0f, 1, a & 15, vex_p_66, 0, 2, 0, !!(a & 16), 0);
+	} else {
+		write_vex(c, rexr, rexi, rexb, vex_m_0f, 0, a, size == 32, vex_p_66);
+	}
+
+	write_opcode(c, 0x58);
+	
+	if (size == 64)
+		return "not implemented";
+
+	// for zmm, mod has to be something different
+
+  // 62 F1 FD 48 58 04 25 00 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [0000000000000000h]
+  // 62 F1 FD 48 58 00                 vaddpd zmm0,zmm0,zmmword ptr [rax]
+  // 62 F1 FD 48 58 04 24              vaddpd zmm0,zmm0,zmmword ptr [rsp]
+  // 62 F1 FD 48 58 45 00              vaddpd zmm0,zmm0,zmmword ptr [rbp]
+  // 62 D1 FD 48 58 00                 vaddpd zmm0,zmm0,zmmword ptr [r8]
+  // 62 F1 FD 48 58 80 01 00 00 00     vaddpd zmm0,zmm0,zmmword ptr [rax+0000000000000001h]
+  // 62 F1 FD 48 58 84 24 01 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [rsp+0000000000000001h]
+  // 62 F1 FD 48 58 85 01 00 00 00     vaddpd zmm0,zmm0,zmmword ptr [rbp+0000000000000001h]
+  // 62 D1 FD 48 58 80 01 00 00 00     vaddpd zmm0,zmm0,zmmword ptr [r8+0000000000000001h]
+  // 62 F1 FD 48 58 04 C0              vaddpd zmm0,zmm0,zmmword ptr [rax+rax*8]
+  // 62 F1 FD 48 58 04 C4              vaddpd zmm0,zmm0,zmmword ptr [rsp+rax*8]
+  // 62 F1 FD 48 58 44 C5 00           vaddpd zmm0,zmm0,zmmword ptr [rbp+rax*8]
+  // 62 D1 FD 48 58 04 C0              vaddpd zmm0,zmm0,zmmword ptr [r8+rax*8]
+  // 62 F1 FD 48 58 84 C0 01 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [rax+rax*8+0000000000000001h]
+  // 62 F1 FD 48 58 84 C4 01 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [rsp+rax*8+0000000000000001h]
+  // 62 F1 FD 48 58 84 C5 01 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [rbp+rax*8+0000000000000001h]
+  // 62 D1 FD 48 58 84 C0 01 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [r8+rax*8+0000000000000001h]
+  // 62 F1 FD 48 58 04 C5 00 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [rax*8+0000000000000000h]
+  // 62 F1 FD 48 58 04 C5 00 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [rax*8+0000000000000000h]
+  // 62 F1 FD 48 58 04 C5 00 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [rax*8+0000000000000000h]
+  // 62 F1 FD 48 58 04 C5 00 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [rax*8+0000000000000000h]
+  // 62 F1 FD 48 58 04 C5 01 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [rax*8+0000000000000001h]
+  // 62 F1 FD 48 58 04 C5 01 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [rax*8+0000000000000001h]
+  // 62 F1 FD 48 58 04 C5 01 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [rax*8+0000000000000001h]
+  // 62 F1 FD 48 58 04 C5 01 00 00 00  vaddpd zmm0,zmm0,zmmword ptr [rax*8+0000000000000001h]
+                    
+
+	write_m(c, b, 0, r7, i7, b7);
+	
+	return 0;
+}
+
 
 #undef no_inline
 #undef force_inline
@@ -968,35 +1161,12 @@ x64w_Result x64w_add_mr64 (uint8_t **c, x64w_Mem d, x64w_Gpr64 s) { return instr
 x64w_Result x64w_addpd_xx(uint8_t **c, x64w_Xmm d, x64w_Xmm s) { return instr_rr(c, d.i, s.i, 16, 0x0f58, OSO); }
 x64w_Result x64w_addpd_xm(uint8_t **c, x64w_Xmm d, x64w_Mem s) { return instr_rm(c, d.i, s, 16, 0x0f58, OSO); }
 
-x64w_Result x64w_vaddpd_xxx(uint8_t **c, x64w_Xmm d, x64w_Xmm a, x64w_Xmm b) {
-	unsigned size = 16;
-	uint64_t flags = OSO;
-
-	X64W_VALIDATE(d.i < 0x10, "invalid xmm register");
-	X64W_VALIDATE(a.i < 0x10, "invalid xmm register");
-	X64W_VALIDATE(b.i < 0x10, "invalid xmm register");
-	
-	unsigned rexw          = !!(flags & REXW);
-	unsigned size_override = !!(flags & OSO);
-	
-	unsigned rexb = !!(a.i & 8);
-	unsigned rexr = !!(d.i & 8);
-	unsigned rexv = !!(b.i & 8);
-
-	//write_vex3(c, rexr, 0, rexv, vex_m_0f, 0, a.i, 0, vex_p_66);
-	if (rexv) {
-		write_vex3(c, rexr, 0, 1, vex_m_0f, 0, a.i, 0, vex_p_66);
-	} else {
-		write_vex2(c, rexr, a.i, 0, vex_p_66);
-	}
-
-	write_opcode(c, 0x58);
-
-	*(*c)++ = 0xc0 | (b.i & 7) | ((d.i & 7) << 3);
-
-	return 0;
-}
-x64w_Result x64w_vaddpd_xxm(uint8_t **c, x64w_Xmm d, x64w_Xmm a, x64w_Mem b) { return ""; }
+x64w_Result x64w_vaddpd_xxx(uint8_t **c, x64w_Xmm d, x64w_Xmm a, x64w_Xmm b) { return instr_xxx(c, d.i, a.i, b.i, 16, 0x58); }
+x64w_Result x64w_vaddpd_xxm(uint8_t **c, x64w_Xmm d, x64w_Xmm a, x64w_Mem b) { return instr_xxm(c, d.i, a.i, b,   16, 0x58); }
+x64w_Result x64w_vaddpd_yyy(uint8_t **c, x64w_Ymm d, x64w_Ymm a, x64w_Ymm b) { return instr_xxx(c, d.i, a.i, b.i, 32, 0x58); }
+x64w_Result x64w_vaddpd_yym(uint8_t **c, x64w_Ymm d, x64w_Ymm a, x64w_Mem b) { return instr_xxm(c, d.i, a.i, b,   32, 0x58); }
+x64w_Result x64w_vaddpd_zzz(uint8_t **c, x64w_Zmm d, x64w_Zmm a, x64w_Zmm b) { return instr_xxx(c, d.i, a.i, b.i, 64, 0x58); }
+x64w_Result x64w_vaddpd_zzm(uint8_t **c, x64w_Zmm d, x64w_Zmm a, x64w_Mem b) { return instr_xxm(c, d.i, a.i, b,   64, 0x58); }
 
 #undef REXW
 #undef OSO
@@ -1036,6 +1206,8 @@ inline constexpr bool operator==(x64w_Gpr16 a, x64w_Gpr16 b) { return a.i == b.i
 inline constexpr bool operator==(x64w_Gpr32 a, x64w_Gpr32 b) { return a.i == b.i; }
 inline constexpr bool operator==(x64w_Gpr64 a, x64w_Gpr64 b) { return a.i == b.i; }
 inline constexpr bool operator==(x64w_Xmm a, x64w_Xmm b) { return a.i == b.i; }
+inline constexpr bool operator==(x64w_Ymm a, x64w_Ymm b) { return a.i == b.i; }
+inline constexpr bool operator==(x64w_Zmm a, x64w_Zmm b) { return a.i == b.i; }
 inline constexpr bool operator==(x64w_Mem a, x64w_Mem b) {
 	if (a.size_override != b.size_override) return false;
 	if (a.base_scale != b.base_scale) return false;
@@ -1059,6 +1231,8 @@ inline constexpr bool operator==(x64w_Mem a, x64w_Mem b) {
 #define Gpr32 x64w_Gpr32
 #define Gpr64 x64w_Gpr64
 #define Xmm x64w_Xmm
+#define Ymm x64w_Ymm
+#define Zmm x64w_Zmm
 #define al   x64w_al
 #define cl   x64w_cl
 #define dl   x64w_dl
@@ -1143,6 +1317,86 @@ inline constexpr bool operator==(x64w_Mem a, x64w_Mem b) {
 #define xmm13 x64w_xmm13
 #define xmm14 x64w_xmm14
 #define xmm15 x64w_xmm15
+#define xmm16 x64w_xmm16
+#define xmm17 x64w_xmm17
+#define xmm18 x64w_xmm18
+#define xmm19 x64w_xmm19
+#define xmm20 x64w_xmm20
+#define xmm21 x64w_xmm21
+#define xmm22 x64w_xmm22
+#define xmm23 x64w_xmm23
+#define xmm24 x64w_xmm24
+#define xmm25 x64w_xmm25
+#define xmm26 x64w_xmm26
+#define xmm27 x64w_xmm27
+#define xmm28 x64w_xmm28
+#define xmm29 x64w_xmm29
+#define xmm30 x64w_xmm30
+#define xmm31 x64w_xmm31
+#define ymm0 x64w_ymm0
+#define ymm1 x64w_ymm1
+#define ymm2 x64w_ymm2
+#define ymm3 x64w_ymm3
+#define ymm4 x64w_ymm4
+#define ymm5 x64w_ymm5
+#define ymm6 x64w_ymm6
+#define ymm7 x64w_ymm7
+#define ymm8 x64w_ymm8
+#define ymm9 x64w_ymm9
+#define ymm10 x64w_ymm10
+#define ymm11 x64w_ymm11
+#define ymm12 x64w_ymm12
+#define ymm13 x64w_ymm13
+#define ymm14 x64w_ymm14
+#define ymm15 x64w_ymm15
+#define ymm16 x64w_ymm16
+#define ymm17 x64w_ymm17
+#define ymm18 x64w_ymm18
+#define ymm19 x64w_ymm19
+#define ymm20 x64w_ymm20
+#define ymm21 x64w_ymm21
+#define ymm22 x64w_ymm22
+#define ymm23 x64w_ymm23
+#define ymm24 x64w_ymm24
+#define ymm25 x64w_ymm25
+#define ymm26 x64w_ymm26
+#define ymm27 x64w_ymm27
+#define ymm28 x64w_ymm28
+#define ymm29 x64w_ymm29
+#define ymm30 x64w_ymm30
+#define ymm31 x64w_ymm31
+#define zmm0 x64w_zmm0
+#define zmm1 x64w_zmm1
+#define zmm2 x64w_zmm2
+#define zmm3 x64w_zmm3
+#define zmm4 x64w_zmm4
+#define zmm5 x64w_zmm5
+#define zmm6 x64w_zmm6
+#define zmm7 x64w_zmm7
+#define zmm8 x64w_zmm8
+#define zmm9 x64w_zmm9
+#define zmm10 x64w_zmm10
+#define zmm11 x64w_zmm11
+#define zmm12 x64w_zmm12
+#define zmm13 x64w_zmm13
+#define zmm14 x64w_zmm14
+#define zmm15 x64w_zmm15
+#define zmm16 x64w_zmm16
+#define zmm17 x64w_zmm17
+#define zmm18 x64w_zmm18
+#define zmm19 x64w_zmm19
+#define zmm20 x64w_zmm20
+#define zmm21 x64w_zmm21
+#define zmm22 x64w_zmm22
+#define zmm23 x64w_zmm23
+#define zmm24 x64w_zmm24
+#define zmm25 x64w_zmm25
+#define zmm26 x64w_zmm26
+#define zmm27 x64w_zmm27
+#define zmm28 x64w_zmm28
+#define zmm29 x64w_zmm29
+#define zmm30 x64w_zmm30
+#define zmm31 x64w_zmm31
 #define Mem x64w_Mem
 #define mem32_b x64w_mem32_b
 #define mem32_i x64w_mem32_i
@@ -1278,8 +1532,12 @@ inline constexpr bool operator==(x64w_Mem a, x64w_Mem b) {
 #define add_mr64  x64w_add_mr64 
 #define addpd_xx  x64w_addpd_xx
 #define addpd_xm  x64w_addpd_xm
-#define vaddpd_xxx  x64w_vaddpd_xxx
-#define vaddpd_xxm  x64w_vaddpd_xxm
+#define vaddpd_xxx x64w_vaddpd_xxx
+#define vaddpd_xxm x64w_vaddpd_xxm
+#define vaddpd_yyy x64w_vaddpd_yyy
+#define vaddpd_yym x64w_vaddpd_yym
+#define vaddpd_zzz x64w_vaddpd_zzz
+#define vaddpd_zzm x64w_vaddpd_zzm
 
 #endif
 
