@@ -396,8 +396,8 @@ X64W_DEF x64w_DisplacementForm x64w_displacement_form(x64w_Mem m);
 X64W_DEF bool x64w_gpr8_compatible_rr(x64w_Gpr8 a, x64w_Gpr8 b);
 X64W_DEF bool x64w_gpr8_compatible_rm(x64w_Gpr8 a, x64w_Mem b);
 
-X64W_DEF x64w_Result x64w_push8i (uint8_t **c, int8_t   i);
-X64W_DEF x64w_Result x64w_push32i(uint8_t **c, int32_t  i);
+X64W_DEF x64w_Result x64w_push_i8 (uint8_t **c, int8_t   i);
+X64W_DEF x64w_Result x64w_push_i32(uint8_t **c, int32_t  i);
 X64W_DEF x64w_Result x64w_push_r16(uint8_t **c, x64w_Gpr16 r);
 X64W_DEF x64w_Result x64w_push_r64(uint8_t **c, x64w_Gpr64 r);
 X64W_DEF x64w_Result x64w_push_m16(uint8_t **c, x64w_Mem m);
@@ -1251,8 +1251,8 @@ static instr_inline x64w_Result instr_xxm(uint8_t **c, uint8_t d, uint8_t a, x64
 #undef force_inline
 #undef instr_inline
 
-x64w_Result x64w_push8i (uint8_t **c, int8_t   i) { return instr_i1(c, i, 0x6a); }
-x64w_Result x64w_push32i(uint8_t **c, int32_t  i) { return instr_i4(c, i, 0x68); }
+x64w_Result x64w_push_i8 (uint8_t **c, int8_t   i) { return instr_i1(c, i, 0x6a); }
+x64w_Result x64w_push_i32(uint8_t **c, int32_t  i) { return instr_i4(c, i, 0x68); }
 x64w_Result x64w_push_r16(uint8_t **c, x64w_Gpr16 s) { return instr_r(c, s.i, 2, 0x50, 0, NO_MODRM | OSO); }
 x64w_Result x64w_push_r64(uint8_t **c, x64w_Gpr64 s) { return instr_r(c, s.i, 8, 0x50, 0, NO_MODRM); }
 x64w_Result x64w_push_m16(uint8_t **c, x64w_Mem d) { return instr_m(c, d, 0xff, 6, OSO); }
@@ -1848,8 +1848,8 @@ inline constexpr bool operator==(x64w_Mem a, x64w_Mem b) {
 #define mem64_bid x64w_mem64_bid
 #define gpr8_compatible_rr x64w_gpr8_compatible_rr
 #define gpr8_compatible_rm x64w_gpr8_compatible_rm
-#define push8i  x64w_push8i 
-#define push32i x64w_push32i
+#define push_i8  x64w_push_i8 
+#define push_i32 x64w_push_i32
 #define push_r16 x64w_push_r16
 #define push_r64 x64w_push_r64
 #define push_m16 x64w_push_m16
