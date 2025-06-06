@@ -89,6 +89,10 @@ d - 32-bit displacement
 #include <stdint.h>
 #include <stdbool.h>
 
+#ifndef X64W_DEF
+#define X64W_DEF extern
+#endif
+
 #if __STDC_VERSION__ >= 202311L || defined(__cplusplus)
 	#define X64W_UNDERLYING(x) :x
 #else
@@ -387,350 +391,350 @@ enum x64w_DisplacementForm {
 //     0 - no displacement
 //     1 - 8 bit displacement
 //     2 - 32 bit displacement
-x64w_DisplacementForm x64w_displacement_form(x64w_Mem m);
+X64W_DEF x64w_DisplacementForm x64w_displacement_form(x64w_Mem m);
 
-bool x64w_gpr8_compatible_rr(x64w_Gpr8 a, x64w_Gpr8 b);
-bool x64w_gpr8_compatible_rm(x64w_Gpr8 a, x64w_Mem b);
+X64W_DEF bool x64w_gpr8_compatible_rr(x64w_Gpr8 a, x64w_Gpr8 b);
+X64W_DEF bool x64w_gpr8_compatible_rm(x64w_Gpr8 a, x64w_Mem b);
 
-x64w_Result x64w_push8i (uint8_t **c, int8_t   i);
-x64w_Result x64w_push32i(uint8_t **c, int32_t  i);
-x64w_Result x64w_push_r16(uint8_t **c, x64w_Gpr16 r);
-x64w_Result x64w_push_r64(uint8_t **c, x64w_Gpr64 r);
-x64w_Result x64w_push_m16(uint8_t **c, x64w_Mem m);
-x64w_Result x64w_push_m64(uint8_t **c, x64w_Mem m);
+X64W_DEF x64w_Result x64w_push8i (uint8_t **c, int8_t   i);
+X64W_DEF x64w_Result x64w_push32i(uint8_t **c, int32_t  i);
+X64W_DEF x64w_Result x64w_push_r16(uint8_t **c, x64w_Gpr16 r);
+X64W_DEF x64w_Result x64w_push_r64(uint8_t **c, x64w_Gpr64 r);
+X64W_DEF x64w_Result x64w_push_m16(uint8_t **c, x64w_Mem m);
+X64W_DEF x64w_Result x64w_push_m64(uint8_t **c, x64w_Mem m);
 
-x64w_Result x64w_pop_r16(uint8_t **c, x64w_Gpr16 r);
-x64w_Result x64w_pop_r64(uint8_t **c, x64w_Gpr64 r);
-x64w_Result x64w_pop_m16(uint8_t **c, x64w_Mem m);
-x64w_Result x64w_pop_m64(uint8_t **c, x64w_Mem m);
+X64W_DEF x64w_Result x64w_pop_r16(uint8_t **c, x64w_Gpr16 r);
+X64W_DEF x64w_Result x64w_pop_r64(uint8_t **c, x64w_Gpr64 r);
+X64W_DEF x64w_Result x64w_pop_m16(uint8_t **c, x64w_Mem m);
+X64W_DEF x64w_Result x64w_pop_m64(uint8_t **c, x64w_Mem m);
 
-x64w_Result x64w_mov_ri8 (uint8_t **c, x64w_Gpr8  r, int8_t  i);
-x64w_Result x64w_mov_ri16(uint8_t **c, x64w_Gpr16 r, int16_t i);
-x64w_Result x64w_mov_ri32(uint8_t **c, x64w_Gpr32 r, int32_t i);
-x64w_Result x64w_mov_ri64(uint8_t **c, x64w_Gpr64 r, int64_t i);
-x64w_Result x64w_mov_rr8 (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
-x64w_Result x64w_mov_rr16(uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
-x64w_Result x64w_mov_rr32(uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
-x64w_Result x64w_mov_rr64(uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
-x64w_Result x64w_mov_rm8 (uint8_t **c, x64w_Gpr8  r, x64w_Mem m);
-x64w_Result x64w_mov_rm16(uint8_t **c, x64w_Gpr16 r, x64w_Mem m);
-x64w_Result x64w_mov_rm32(uint8_t **c, x64w_Gpr32 r, x64w_Mem m);
-x64w_Result x64w_mov_rm64(uint8_t **c, x64w_Gpr64 r, x64w_Mem m);
-x64w_Result x64w_mov_mi8 (uint8_t **c, x64w_Mem m, int8_t  i);
-x64w_Result x64w_mov_mi16(uint8_t **c, x64w_Mem m, int16_t i);
-x64w_Result x64w_mov_mi32(uint8_t **c, x64w_Mem m, int32_t i);
-x64w_Result x64w_mov_m64i32(uint8_t **c, x64w_Mem m, int32_t i);
-x64w_Result x64w_mov_mr8 (uint8_t **c, x64w_Mem m, x64w_Gpr8  r);
-x64w_Result x64w_mov_mr16(uint8_t **c, x64w_Mem m, x64w_Gpr16 r);
-x64w_Result x64w_mov_mr32(uint8_t **c, x64w_Mem m, x64w_Gpr32 r);
-x64w_Result x64w_mov_mr64(uint8_t **c, x64w_Mem m, x64w_Gpr64 r);
+X64W_DEF x64w_Result x64w_mov_ri8 (uint8_t **c, x64w_Gpr8  r, int8_t  i);
+X64W_DEF x64w_Result x64w_mov_ri16(uint8_t **c, x64w_Gpr16 r, int16_t i);
+X64W_DEF x64w_Result x64w_mov_ri32(uint8_t **c, x64w_Gpr32 r, int32_t i);
+X64W_DEF x64w_Result x64w_mov_ri64(uint8_t **c, x64w_Gpr64 r, int64_t i);
+X64W_DEF x64w_Result x64w_mov_rr8 (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_mov_rr16(uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_mov_rr32(uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_mov_rr64(uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_mov_rm8 (uint8_t **c, x64w_Gpr8  r, x64w_Mem m);
+X64W_DEF x64w_Result x64w_mov_rm16(uint8_t **c, x64w_Gpr16 r, x64w_Mem m);
+X64W_DEF x64w_Result x64w_mov_rm32(uint8_t **c, x64w_Gpr32 r, x64w_Mem m);
+X64W_DEF x64w_Result x64w_mov_rm64(uint8_t **c, x64w_Gpr64 r, x64w_Mem m);
+X64W_DEF x64w_Result x64w_mov_mi8 (uint8_t **c, x64w_Mem m, int8_t  i);
+X64W_DEF x64w_Result x64w_mov_mi16(uint8_t **c, x64w_Mem m, int16_t i);
+X64W_DEF x64w_Result x64w_mov_mi32(uint8_t **c, x64w_Mem m, int32_t i);
+X64W_DEF x64w_Result x64w_mov_m64i32(uint8_t **c, x64w_Mem m, int32_t i);
+X64W_DEF x64w_Result x64w_mov_mr8 (uint8_t **c, x64w_Mem m, x64w_Gpr8  r);
+X64W_DEF x64w_Result x64w_mov_mr16(uint8_t **c, x64w_Mem m, x64w_Gpr16 r);
+X64W_DEF x64w_Result x64w_mov_mr32(uint8_t **c, x64w_Mem m, x64w_Gpr32 r);
+X64W_DEF x64w_Result x64w_mov_mr64(uint8_t **c, x64w_Mem m, x64w_Gpr64 r);
 
-x64w_Result x64w_adcx_rr32(uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
-x64w_Result x64w_adcx_rr64(uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_adcx_rr32(uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_adcx_rr64(uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
 
-x64w_Result x64w_adc_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i);
-x64w_Result x64w_adc_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i);
-x64w_Result x64w_adc_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i);
-x64w_Result x64w_adc_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i);
-x64w_Result x64w_adc_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i);
-x64w_Result x64w_adc_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i);
-x64w_Result x64w_adc_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i);
-x64w_Result x64w_adc_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
-x64w_Result x64w_adc_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
-x64w_Result x64w_adc_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
-x64w_Result x64w_adc_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
-x64w_Result x64w_adc_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s);
-x64w_Result x64w_adc_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s);
-x64w_Result x64w_adc_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s);
-x64w_Result x64w_adc_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s);
-x64w_Result x64w_adc_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i);
-x64w_Result x64w_adc_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i);
-x64w_Result x64w_adc_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_adc_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_adc_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i);
-x64w_Result x64w_adc_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_adc_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_adc_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s);
-x64w_Result x64w_adc_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s);
-x64w_Result x64w_adc_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s);
-x64w_Result x64w_adc_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s);
-x64w_Result x64w_add_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i);
-x64w_Result x64w_add_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i);
-x64w_Result x64w_add_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i);
-x64w_Result x64w_add_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i);
-x64w_Result x64w_add_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i);
-x64w_Result x64w_add_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i);
-x64w_Result x64w_add_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i);
-x64w_Result x64w_add_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
-x64w_Result x64w_add_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
-x64w_Result x64w_add_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
-x64w_Result x64w_add_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
-x64w_Result x64w_add_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s);
-x64w_Result x64w_add_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s);
-x64w_Result x64w_add_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s);
-x64w_Result x64w_add_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s);
-x64w_Result x64w_add_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i);
-x64w_Result x64w_add_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i);
-x64w_Result x64w_add_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_add_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_add_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i);
-x64w_Result x64w_add_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_add_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_add_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s);
-x64w_Result x64w_add_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s);
-x64w_Result x64w_add_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s);
-x64w_Result x64w_add_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s);
-x64w_Result x64w_xor_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i);
-x64w_Result x64w_xor_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i);
-x64w_Result x64w_xor_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i);
-x64w_Result x64w_xor_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i);
-x64w_Result x64w_xor_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i);
-x64w_Result x64w_xor_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i);
-x64w_Result x64w_xor_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i);
-x64w_Result x64w_xor_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
-x64w_Result x64w_xor_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
-x64w_Result x64w_xor_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
-x64w_Result x64w_xor_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
-x64w_Result x64w_xor_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s);
-x64w_Result x64w_xor_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s);
-x64w_Result x64w_xor_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s);
-x64w_Result x64w_xor_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s);
-x64w_Result x64w_xor_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i);
-x64w_Result x64w_xor_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i);
-x64w_Result x64w_xor_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_xor_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_xor_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i);
-x64w_Result x64w_xor_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_xor_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_xor_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s);
-x64w_Result x64w_xor_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s);
-x64w_Result x64w_xor_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s);
-x64w_Result x64w_xor_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s);
-x64w_Result x64w_and_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i);
-x64w_Result x64w_and_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i);
-x64w_Result x64w_and_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i);
-x64w_Result x64w_and_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i);
-x64w_Result x64w_and_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i);
-x64w_Result x64w_and_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i);
-x64w_Result x64w_and_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i);
-x64w_Result x64w_and_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
-x64w_Result x64w_and_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
-x64w_Result x64w_and_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
-x64w_Result x64w_and_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
-x64w_Result x64w_and_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s);
-x64w_Result x64w_and_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s);
-x64w_Result x64w_and_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s);
-x64w_Result x64w_and_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s);
-x64w_Result x64w_and_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i);
-x64w_Result x64w_and_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i);
-x64w_Result x64w_and_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_and_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_and_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i);
-x64w_Result x64w_and_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_and_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_and_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s);
-x64w_Result x64w_and_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s);
-x64w_Result x64w_and_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s);
-x64w_Result x64w_and_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s);
-x64w_Result x64w_or_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i);
-x64w_Result x64w_or_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i);
-x64w_Result x64w_or_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i);
-x64w_Result x64w_or_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i);
-x64w_Result x64w_or_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i);
-x64w_Result x64w_or_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i);
-x64w_Result x64w_or_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i);
-x64w_Result x64w_or_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
-x64w_Result x64w_or_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
-x64w_Result x64w_or_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
-x64w_Result x64w_or_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
-x64w_Result x64w_or_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s);
-x64w_Result x64w_or_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s);
-x64w_Result x64w_or_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s);
-x64w_Result x64w_or_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s);
-x64w_Result x64w_or_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i);
-x64w_Result x64w_or_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i);
-x64w_Result x64w_or_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_or_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_or_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i);
-x64w_Result x64w_or_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_or_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_or_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s);
-x64w_Result x64w_or_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s);
-x64w_Result x64w_or_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s);
-x64w_Result x64w_or_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s);
-x64w_Result x64w_sub_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i);
-x64w_Result x64w_sub_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i);
-x64w_Result x64w_sub_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i);
-x64w_Result x64w_sub_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i);
-x64w_Result x64w_sub_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i);
-x64w_Result x64w_sub_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i);
-x64w_Result x64w_sub_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i);
-x64w_Result x64w_sub_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
-x64w_Result x64w_sub_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
-x64w_Result x64w_sub_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
-x64w_Result x64w_sub_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
-x64w_Result x64w_sub_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s);
-x64w_Result x64w_sub_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s);
-x64w_Result x64w_sub_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s);
-x64w_Result x64w_sub_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s);
-x64w_Result x64w_sub_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i);
-x64w_Result x64w_sub_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i);
-x64w_Result x64w_sub_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_sub_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_sub_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i);
-x64w_Result x64w_sub_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_sub_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
-x64w_Result x64w_sub_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s);
-x64w_Result x64w_sub_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s);
-x64w_Result x64w_sub_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s);
-x64w_Result x64w_sub_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s);
-x64w_Result x64w_inc_r8   (uint8_t **c, x64w_Gpr8  d);
-x64w_Result x64w_inc_r16  (uint8_t **c, x64w_Gpr16 d);
-x64w_Result x64w_inc_r32  (uint8_t **c, x64w_Gpr32 d);
-x64w_Result x64w_inc_r64  (uint8_t **c, x64w_Gpr64 d);
-x64w_Result x64w_inc_m8   (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_inc_m16  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_inc_m32  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_inc_m64  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_dec_r8   (uint8_t **c, x64w_Gpr8  d);
-x64w_Result x64w_dec_r16  (uint8_t **c, x64w_Gpr16 d);
-x64w_Result x64w_dec_r32  (uint8_t **c, x64w_Gpr32 d);
-x64w_Result x64w_dec_r64  (uint8_t **c, x64w_Gpr64 d);
-x64w_Result x64w_dec_m8   (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_dec_m16  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_dec_m32  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_dec_m64  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_not_r8   (uint8_t **c, x64w_Gpr8  d);
-x64w_Result x64w_not_r16  (uint8_t **c, x64w_Gpr16 d);
-x64w_Result x64w_not_r32  (uint8_t **c, x64w_Gpr32 d);
-x64w_Result x64w_not_r64  (uint8_t **c, x64w_Gpr64 d);
-x64w_Result x64w_not_m8   (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_not_m16  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_not_m32  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_not_m64  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_neg_r8   (uint8_t **c, x64w_Gpr8  d);
-x64w_Result x64w_neg_r16  (uint8_t **c, x64w_Gpr16 d);
-x64w_Result x64w_neg_r32  (uint8_t **c, x64w_Gpr32 d);
-x64w_Result x64w_neg_r64  (uint8_t **c, x64w_Gpr64 d);
-x64w_Result x64w_neg_m8   (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_neg_m16  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_neg_m32  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_neg_m64  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_mul_r8   (uint8_t **c, x64w_Gpr8  d);
-x64w_Result x64w_mul_r16  (uint8_t **c, x64w_Gpr16 d);
-x64w_Result x64w_mul_r32  (uint8_t **c, x64w_Gpr32 d);
-x64w_Result x64w_mul_r64  (uint8_t **c, x64w_Gpr64 d);
-x64w_Result x64w_mul_m8   (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_mul_m16  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_mul_m32  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_mul_m64  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_div_r8   (uint8_t **c, x64w_Gpr8  d);
-x64w_Result x64w_div_r16  (uint8_t **c, x64w_Gpr16 d);
-x64w_Result x64w_div_r32  (uint8_t **c, x64w_Gpr32 d);
-x64w_Result x64w_div_r64  (uint8_t **c, x64w_Gpr64 d);
-x64w_Result x64w_div_m8   (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_div_m16  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_div_m32  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_div_m64  (uint8_t **c, x64w_Mem   d);
-x64w_Result x64w_shl_r8_1  (uint8_t **c, x64w_Gpr8  r           );
-x64w_Result x64w_shl_r16_1 (uint8_t **c, x64w_Gpr16 r           );
-x64w_Result x64w_shl_r32_1 (uint8_t **c, x64w_Gpr32 r           );
-x64w_Result x64w_shl_r64_1 (uint8_t **c, x64w_Gpr64 r           );
-x64w_Result x64w_shl_ri8   (uint8_t **c, x64w_Gpr8  r, uint8_t i);
-x64w_Result x64w_shl_r16i8 (uint8_t **c, x64w_Gpr16 r, uint8_t i);
-x64w_Result x64w_shl_r32i8 (uint8_t **c, x64w_Gpr32 r, uint8_t i);
-x64w_Result x64w_shl_r64i8 (uint8_t **c, x64w_Gpr64 r, uint8_t i);
-x64w_Result x64w_shl_r8_cl (uint8_t **c, x64w_Gpr8  r           );
-x64w_Result x64w_shl_r16_cl(uint8_t **c, x64w_Gpr16 r           );
-x64w_Result x64w_shl_r32_cl(uint8_t **c, x64w_Gpr32 r           );
-x64w_Result x64w_shl_r64_cl(uint8_t **c, x64w_Gpr64 r           );
-x64w_Result x64w_shl_m8_1  (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shl_m16_1 (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shl_m32_1 (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shl_m64_1 (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shl_mi8   (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_shl_m16i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_shl_m32i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_shl_m64i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_shl_m8_cl (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shl_m16_cl(uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shl_m32_cl(uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shl_m64_cl(uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shr_r8_1  (uint8_t **c, x64w_Gpr8  r           );
-x64w_Result x64w_shr_r16_1 (uint8_t **c, x64w_Gpr16 r           );
-x64w_Result x64w_shr_r32_1 (uint8_t **c, x64w_Gpr32 r           );
-x64w_Result x64w_shr_r64_1 (uint8_t **c, x64w_Gpr64 r           );
-x64w_Result x64w_shr_ri8   (uint8_t **c, x64w_Gpr8  r, uint8_t i);
-x64w_Result x64w_shr_r16i8 (uint8_t **c, x64w_Gpr16 r, uint8_t i);
-x64w_Result x64w_shr_r32i8 (uint8_t **c, x64w_Gpr32 r, uint8_t i);
-x64w_Result x64w_shr_r64i8 (uint8_t **c, x64w_Gpr64 r, uint8_t i);
-x64w_Result x64w_shr_r8_cl (uint8_t **c, x64w_Gpr8  r           );
-x64w_Result x64w_shr_r16_cl(uint8_t **c, x64w_Gpr16 r           );
-x64w_Result x64w_shr_r32_cl(uint8_t **c, x64w_Gpr32 r           );
-x64w_Result x64w_shr_r64_cl(uint8_t **c, x64w_Gpr64 r           );
-x64w_Result x64w_shr_m8_1  (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shr_m16_1 (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shr_m32_1 (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shr_m64_1 (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shr_mi8   (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_shr_m16i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_shr_m32i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_shr_m64i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_shr_m8_cl (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shr_m16_cl(uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shr_m32_cl(uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_shr_m64_cl(uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sal_r8_1  (uint8_t **c, x64w_Gpr8  r           );
-x64w_Result x64w_sal_r16_1 (uint8_t **c, x64w_Gpr16 r           );
-x64w_Result x64w_sal_r32_1 (uint8_t **c, x64w_Gpr32 r           );
-x64w_Result x64w_sal_r64_1 (uint8_t **c, x64w_Gpr64 r           );
-x64w_Result x64w_sal_ri8   (uint8_t **c, x64w_Gpr8  r, uint8_t i);
-x64w_Result x64w_sal_r16i8 (uint8_t **c, x64w_Gpr16 r, uint8_t i);
-x64w_Result x64w_sal_r32i8 (uint8_t **c, x64w_Gpr32 r, uint8_t i);
-x64w_Result x64w_sal_r64i8 (uint8_t **c, x64w_Gpr64 r, uint8_t i);
-x64w_Result x64w_sal_r8_cl (uint8_t **c, x64w_Gpr8  r           );
-x64w_Result x64w_sal_r16_cl(uint8_t **c, x64w_Gpr16 r           );
-x64w_Result x64w_sal_r32_cl(uint8_t **c, x64w_Gpr32 r           );
-x64w_Result x64w_sal_r64_cl(uint8_t **c, x64w_Gpr64 r           );
-x64w_Result x64w_sal_m8_1  (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sal_m16_1 (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sal_m32_1 (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sal_m64_1 (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sal_mi8   (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_sal_m16i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_sal_m32i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_sal_m64i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_sal_m8_cl (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sal_m16_cl(uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sal_m32_cl(uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sal_m64_cl(uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sar_r8_1  (uint8_t **c, x64w_Gpr8  r           );
-x64w_Result x64w_sar_r16_1 (uint8_t **c, x64w_Gpr16 r           );
-x64w_Result x64w_sar_r32_1 (uint8_t **c, x64w_Gpr32 r           );
-x64w_Result x64w_sar_r64_1 (uint8_t **c, x64w_Gpr64 r           );
-x64w_Result x64w_sar_ri8   (uint8_t **c, x64w_Gpr8  r, uint8_t i);
-x64w_Result x64w_sar_r16i8 (uint8_t **c, x64w_Gpr16 r, uint8_t i);
-x64w_Result x64w_sar_r32i8 (uint8_t **c, x64w_Gpr32 r, uint8_t i);
-x64w_Result x64w_sar_r64i8 (uint8_t **c, x64w_Gpr64 r, uint8_t i);
-x64w_Result x64w_sar_r8_cl (uint8_t **c, x64w_Gpr8  r           );
-x64w_Result x64w_sar_r16_cl(uint8_t **c, x64w_Gpr16 r           );
-x64w_Result x64w_sar_r32_cl(uint8_t **c, x64w_Gpr32 r           );
-x64w_Result x64w_sar_r64_cl(uint8_t **c, x64w_Gpr64 r           );
-x64w_Result x64w_sar_m8_1  (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sar_m16_1 (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sar_m32_1 (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sar_m64_1 (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sar_mi8   (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_sar_m16i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_sar_m32i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_sar_m64i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
-x64w_Result x64w_sar_m8_cl (uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sar_m16_cl(uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sar_m32_cl(uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_sar_m64_cl(uint8_t **c, x64w_Mem   m           );
-x64w_Result x64w_lea_rm16(uint8_t **c, x64w_Gpr16 r, x64w_Mem m);
-x64w_Result x64w_lea_rm32(uint8_t **c, x64w_Gpr32 r, x64w_Mem m);
-x64w_Result x64w_lea_rm64(uint8_t **c, x64w_Gpr64 r, x64w_Mem m);
+X64W_DEF x64w_Result x64w_adc_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i);
+X64W_DEF x64w_Result x64w_adc_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i);
+X64W_DEF x64w_Result x64w_adc_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i);
+X64W_DEF x64w_Result x64w_adc_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i);
+X64W_DEF x64w_Result x64w_adc_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i);
+X64W_DEF x64w_Result x64w_adc_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i);
+X64W_DEF x64w_Result x64w_adc_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i);
+X64W_DEF x64w_Result x64w_adc_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_adc_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_adc_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_adc_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_adc_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_adc_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_adc_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_adc_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_adc_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i);
+X64W_DEF x64w_Result x64w_adc_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i);
+X64W_DEF x64w_Result x64w_adc_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_adc_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_adc_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i);
+X64W_DEF x64w_Result x64w_adc_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_adc_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_adc_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_adc_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_adc_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_adc_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_add_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i);
+X64W_DEF x64w_Result x64w_add_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i);
+X64W_DEF x64w_Result x64w_add_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i);
+X64W_DEF x64w_Result x64w_add_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i);
+X64W_DEF x64w_Result x64w_add_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i);
+X64W_DEF x64w_Result x64w_add_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i);
+X64W_DEF x64w_Result x64w_add_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i);
+X64W_DEF x64w_Result x64w_add_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_add_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_add_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_add_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_add_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_add_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_add_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_add_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_add_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i);
+X64W_DEF x64w_Result x64w_add_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i);
+X64W_DEF x64w_Result x64w_add_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_add_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_add_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i);
+X64W_DEF x64w_Result x64w_add_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_add_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_add_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_add_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_add_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_add_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_xor_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i);
+X64W_DEF x64w_Result x64w_xor_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i);
+X64W_DEF x64w_Result x64w_xor_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i);
+X64W_DEF x64w_Result x64w_xor_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i);
+X64W_DEF x64w_Result x64w_xor_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i);
+X64W_DEF x64w_Result x64w_xor_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i);
+X64W_DEF x64w_Result x64w_xor_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i);
+X64W_DEF x64w_Result x64w_xor_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_xor_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_xor_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_xor_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_xor_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_xor_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_xor_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_xor_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_xor_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i);
+X64W_DEF x64w_Result x64w_xor_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i);
+X64W_DEF x64w_Result x64w_xor_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_xor_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_xor_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i);
+X64W_DEF x64w_Result x64w_xor_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_xor_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_xor_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_xor_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_xor_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_xor_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_and_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i);
+X64W_DEF x64w_Result x64w_and_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i);
+X64W_DEF x64w_Result x64w_and_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i);
+X64W_DEF x64w_Result x64w_and_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i);
+X64W_DEF x64w_Result x64w_and_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i);
+X64W_DEF x64w_Result x64w_and_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i);
+X64W_DEF x64w_Result x64w_and_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i);
+X64W_DEF x64w_Result x64w_and_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_and_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_and_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_and_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_and_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_and_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_and_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_and_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_and_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i);
+X64W_DEF x64w_Result x64w_and_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i);
+X64W_DEF x64w_Result x64w_and_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_and_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_and_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i);
+X64W_DEF x64w_Result x64w_and_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_and_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_and_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_and_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_and_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_and_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_or_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i);
+X64W_DEF x64w_Result x64w_or_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i);
+X64W_DEF x64w_Result x64w_or_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i);
+X64W_DEF x64w_Result x64w_or_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i);
+X64W_DEF x64w_Result x64w_or_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i);
+X64W_DEF x64w_Result x64w_or_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i);
+X64W_DEF x64w_Result x64w_or_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i);
+X64W_DEF x64w_Result x64w_or_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_or_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_or_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_or_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_or_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_or_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_or_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_or_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_or_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i);
+X64W_DEF x64w_Result x64w_or_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i);
+X64W_DEF x64w_Result x64w_or_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_or_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_or_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i);
+X64W_DEF x64w_Result x64w_or_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_or_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_or_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_or_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_or_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_or_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_sub_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i);
+X64W_DEF x64w_Result x64w_sub_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i);
+X64W_DEF x64w_Result x64w_sub_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i);
+X64W_DEF x64w_Result x64w_sub_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i);
+X64W_DEF x64w_Result x64w_sub_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i);
+X64W_DEF x64w_Result x64w_sub_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i);
+X64W_DEF x64w_Result x64w_sub_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i);
+X64W_DEF x64w_Result x64w_sub_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_sub_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_sub_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_sub_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_sub_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_sub_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_sub_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_sub_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s);
+X64W_DEF x64w_Result x64w_sub_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i);
+X64W_DEF x64w_Result x64w_sub_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i);
+X64W_DEF x64w_Result x64w_sub_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_sub_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_sub_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i);
+X64W_DEF x64w_Result x64w_sub_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_sub_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i);
+X64W_DEF x64w_Result x64w_sub_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s);
+X64W_DEF x64w_Result x64w_sub_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s);
+X64W_DEF x64w_Result x64w_sub_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s);
+X64W_DEF x64w_Result x64w_sub_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s);
+X64W_DEF x64w_Result x64w_inc_r8   (uint8_t **c, x64w_Gpr8  d);
+X64W_DEF x64w_Result x64w_inc_r16  (uint8_t **c, x64w_Gpr16 d);
+X64W_DEF x64w_Result x64w_inc_r32  (uint8_t **c, x64w_Gpr32 d);
+X64W_DEF x64w_Result x64w_inc_r64  (uint8_t **c, x64w_Gpr64 d);
+X64W_DEF x64w_Result x64w_inc_m8   (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_inc_m16  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_inc_m32  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_inc_m64  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_dec_r8   (uint8_t **c, x64w_Gpr8  d);
+X64W_DEF x64w_Result x64w_dec_r16  (uint8_t **c, x64w_Gpr16 d);
+X64W_DEF x64w_Result x64w_dec_r32  (uint8_t **c, x64w_Gpr32 d);
+X64W_DEF x64w_Result x64w_dec_r64  (uint8_t **c, x64w_Gpr64 d);
+X64W_DEF x64w_Result x64w_dec_m8   (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_dec_m16  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_dec_m32  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_dec_m64  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_not_r8   (uint8_t **c, x64w_Gpr8  d);
+X64W_DEF x64w_Result x64w_not_r16  (uint8_t **c, x64w_Gpr16 d);
+X64W_DEF x64w_Result x64w_not_r32  (uint8_t **c, x64w_Gpr32 d);
+X64W_DEF x64w_Result x64w_not_r64  (uint8_t **c, x64w_Gpr64 d);
+X64W_DEF x64w_Result x64w_not_m8   (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_not_m16  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_not_m32  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_not_m64  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_neg_r8   (uint8_t **c, x64w_Gpr8  d);
+X64W_DEF x64w_Result x64w_neg_r16  (uint8_t **c, x64w_Gpr16 d);
+X64W_DEF x64w_Result x64w_neg_r32  (uint8_t **c, x64w_Gpr32 d);
+X64W_DEF x64w_Result x64w_neg_r64  (uint8_t **c, x64w_Gpr64 d);
+X64W_DEF x64w_Result x64w_neg_m8   (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_neg_m16  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_neg_m32  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_neg_m64  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_mul_r8   (uint8_t **c, x64w_Gpr8  d);
+X64W_DEF x64w_Result x64w_mul_r16  (uint8_t **c, x64w_Gpr16 d);
+X64W_DEF x64w_Result x64w_mul_r32  (uint8_t **c, x64w_Gpr32 d);
+X64W_DEF x64w_Result x64w_mul_r64  (uint8_t **c, x64w_Gpr64 d);
+X64W_DEF x64w_Result x64w_mul_m8   (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_mul_m16  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_mul_m32  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_mul_m64  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_div_r8   (uint8_t **c, x64w_Gpr8  d);
+X64W_DEF x64w_Result x64w_div_r16  (uint8_t **c, x64w_Gpr16 d);
+X64W_DEF x64w_Result x64w_div_r32  (uint8_t **c, x64w_Gpr32 d);
+X64W_DEF x64w_Result x64w_div_r64  (uint8_t **c, x64w_Gpr64 d);
+X64W_DEF x64w_Result x64w_div_m8   (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_div_m16  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_div_m32  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_div_m64  (uint8_t **c, x64w_Mem   d);
+X64W_DEF x64w_Result x64w_shl_r8_1  (uint8_t **c, x64w_Gpr8  r           );
+X64W_DEF x64w_Result x64w_shl_r16_1 (uint8_t **c, x64w_Gpr16 r           );
+X64W_DEF x64w_Result x64w_shl_r32_1 (uint8_t **c, x64w_Gpr32 r           );
+X64W_DEF x64w_Result x64w_shl_r64_1 (uint8_t **c, x64w_Gpr64 r           );
+X64W_DEF x64w_Result x64w_shl_ri8   (uint8_t **c, x64w_Gpr8  r, uint8_t i);
+X64W_DEF x64w_Result x64w_shl_r16i8 (uint8_t **c, x64w_Gpr16 r, uint8_t i);
+X64W_DEF x64w_Result x64w_shl_r32i8 (uint8_t **c, x64w_Gpr32 r, uint8_t i);
+X64W_DEF x64w_Result x64w_shl_r64i8 (uint8_t **c, x64w_Gpr64 r, uint8_t i);
+X64W_DEF x64w_Result x64w_shl_r8_cl (uint8_t **c, x64w_Gpr8  r           );
+X64W_DEF x64w_Result x64w_shl_r16_cl(uint8_t **c, x64w_Gpr16 r           );
+X64W_DEF x64w_Result x64w_shl_r32_cl(uint8_t **c, x64w_Gpr32 r           );
+X64W_DEF x64w_Result x64w_shl_r64_cl(uint8_t **c, x64w_Gpr64 r           );
+X64W_DEF x64w_Result x64w_shl_m8_1  (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shl_m16_1 (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shl_m32_1 (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shl_m64_1 (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shl_mi8   (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_shl_m16i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_shl_m32i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_shl_m64i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_shl_m8_cl (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shl_m16_cl(uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shl_m32_cl(uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shl_m64_cl(uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shr_r8_1  (uint8_t **c, x64w_Gpr8  r           );
+X64W_DEF x64w_Result x64w_shr_r16_1 (uint8_t **c, x64w_Gpr16 r           );
+X64W_DEF x64w_Result x64w_shr_r32_1 (uint8_t **c, x64w_Gpr32 r           );
+X64W_DEF x64w_Result x64w_shr_r64_1 (uint8_t **c, x64w_Gpr64 r           );
+X64W_DEF x64w_Result x64w_shr_ri8   (uint8_t **c, x64w_Gpr8  r, uint8_t i);
+X64W_DEF x64w_Result x64w_shr_r16i8 (uint8_t **c, x64w_Gpr16 r, uint8_t i);
+X64W_DEF x64w_Result x64w_shr_r32i8 (uint8_t **c, x64w_Gpr32 r, uint8_t i);
+X64W_DEF x64w_Result x64w_shr_r64i8 (uint8_t **c, x64w_Gpr64 r, uint8_t i);
+X64W_DEF x64w_Result x64w_shr_r8_cl (uint8_t **c, x64w_Gpr8  r           );
+X64W_DEF x64w_Result x64w_shr_r16_cl(uint8_t **c, x64w_Gpr16 r           );
+X64W_DEF x64w_Result x64w_shr_r32_cl(uint8_t **c, x64w_Gpr32 r           );
+X64W_DEF x64w_Result x64w_shr_r64_cl(uint8_t **c, x64w_Gpr64 r           );
+X64W_DEF x64w_Result x64w_shr_m8_1  (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shr_m16_1 (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shr_m32_1 (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shr_m64_1 (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shr_mi8   (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_shr_m16i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_shr_m32i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_shr_m64i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_shr_m8_cl (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shr_m16_cl(uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shr_m32_cl(uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_shr_m64_cl(uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sal_r8_1  (uint8_t **c, x64w_Gpr8  r           );
+X64W_DEF x64w_Result x64w_sal_r16_1 (uint8_t **c, x64w_Gpr16 r           );
+X64W_DEF x64w_Result x64w_sal_r32_1 (uint8_t **c, x64w_Gpr32 r           );
+X64W_DEF x64w_Result x64w_sal_r64_1 (uint8_t **c, x64w_Gpr64 r           );
+X64W_DEF x64w_Result x64w_sal_ri8   (uint8_t **c, x64w_Gpr8  r, uint8_t i);
+X64W_DEF x64w_Result x64w_sal_r16i8 (uint8_t **c, x64w_Gpr16 r, uint8_t i);
+X64W_DEF x64w_Result x64w_sal_r32i8 (uint8_t **c, x64w_Gpr32 r, uint8_t i);
+X64W_DEF x64w_Result x64w_sal_r64i8 (uint8_t **c, x64w_Gpr64 r, uint8_t i);
+X64W_DEF x64w_Result x64w_sal_r8_cl (uint8_t **c, x64w_Gpr8  r           );
+X64W_DEF x64w_Result x64w_sal_r16_cl(uint8_t **c, x64w_Gpr16 r           );
+X64W_DEF x64w_Result x64w_sal_r32_cl(uint8_t **c, x64w_Gpr32 r           );
+X64W_DEF x64w_Result x64w_sal_r64_cl(uint8_t **c, x64w_Gpr64 r           );
+X64W_DEF x64w_Result x64w_sal_m8_1  (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sal_m16_1 (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sal_m32_1 (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sal_m64_1 (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sal_mi8   (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_sal_m16i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_sal_m32i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_sal_m64i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_sal_m8_cl (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sal_m16_cl(uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sal_m32_cl(uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sal_m64_cl(uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sar_r8_1  (uint8_t **c, x64w_Gpr8  r           );
+X64W_DEF x64w_Result x64w_sar_r16_1 (uint8_t **c, x64w_Gpr16 r           );
+X64W_DEF x64w_Result x64w_sar_r32_1 (uint8_t **c, x64w_Gpr32 r           );
+X64W_DEF x64w_Result x64w_sar_r64_1 (uint8_t **c, x64w_Gpr64 r           );
+X64W_DEF x64w_Result x64w_sar_ri8   (uint8_t **c, x64w_Gpr8  r, uint8_t i);
+X64W_DEF x64w_Result x64w_sar_r16i8 (uint8_t **c, x64w_Gpr16 r, uint8_t i);
+X64W_DEF x64w_Result x64w_sar_r32i8 (uint8_t **c, x64w_Gpr32 r, uint8_t i);
+X64W_DEF x64w_Result x64w_sar_r64i8 (uint8_t **c, x64w_Gpr64 r, uint8_t i);
+X64W_DEF x64w_Result x64w_sar_r8_cl (uint8_t **c, x64w_Gpr8  r           );
+X64W_DEF x64w_Result x64w_sar_r16_cl(uint8_t **c, x64w_Gpr16 r           );
+X64W_DEF x64w_Result x64w_sar_r32_cl(uint8_t **c, x64w_Gpr32 r           );
+X64W_DEF x64w_Result x64w_sar_r64_cl(uint8_t **c, x64w_Gpr64 r           );
+X64W_DEF x64w_Result x64w_sar_m8_1  (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sar_m16_1 (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sar_m32_1 (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sar_m64_1 (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sar_mi8   (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_sar_m16i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_sar_m32i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_sar_m64i8 (uint8_t **c, x64w_Mem   m, uint8_t i);
+X64W_DEF x64w_Result x64w_sar_m8_cl (uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sar_m16_cl(uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sar_m32_cl(uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_sar_m64_cl(uint8_t **c, x64w_Mem   m           );
+X64W_DEF x64w_Result x64w_lea_rm16(uint8_t **c, x64w_Gpr16 r, x64w_Mem m);
+X64W_DEF x64w_Result x64w_lea_rm32(uint8_t **c, x64w_Gpr32 r, x64w_Mem m);
+X64W_DEF x64w_Result x64w_lea_rm64(uint8_t **c, x64w_Gpr64 r, x64w_Mem m);
 
 
 #ifdef X64W_IMPLEMENTATION
@@ -1300,14 +1304,14 @@ x64w_Result x64w_adc_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i) { return in
 x64w_Result x64w_adc_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 2,  OSO); }
 x64w_Result x64w_adc_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 2,    0); }
 x64w_Result x64w_adc_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 2, REXW); }
-x64w_Result x64w_adc_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s) { return instr_rr(c, d.i, s.i, 1, 0x12,        0); }
-x64w_Result x64w_adc_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s) { return instr_rr(c, d.i, s.i, 2, 0x13,      OSO); }
-x64w_Result x64w_adc_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s) { return instr_rr(c, d.i, s.i, 4, 0x13,        0); }
-x64w_Result x64w_adc_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s) { return instr_rr(c, d.i, s.i, 8, 0x13,     REXW); }
-x64w_Result x64w_adc_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 1, 0x12,        0); }
-x64w_Result x64w_adc_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 2, 0x13,      OSO); }
-x64w_Result x64w_adc_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 4, 0x13,        0); }
-x64w_Result x64w_adc_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 8, 0x13,     REXW); }
+x64w_Result x64w_adc_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s) { return instr_rr(c, d.i, s.i, 1, 0x12,       0); }
+x64w_Result x64w_adc_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s) { return instr_rr(c, d.i, s.i, 2, 0x13,     OSO); }
+x64w_Result x64w_adc_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s) { return instr_rr(c, d.i, s.i, 4, 0x13,       0); }
+x64w_Result x64w_adc_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s) { return instr_rr(c, d.i, s.i, 8, 0x13,    REXW); }
+x64w_Result x64w_adc_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 1, 0x12,       0); }
+x64w_Result x64w_adc_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 2, 0x13,     OSO); }
+x64w_Result x64w_adc_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 4, 0x13,       0); }
+x64w_Result x64w_adc_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 8, 0x13,    REXW); }
 x64w_Result x64w_adc_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i) { return instr_mi(c,   m,   i, 1, 0x80, 2,    0); }
 x64w_Result x64w_adc_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i) { return instr_mi(c,   m,   i, 2, 0x81, 2,  OSO); }
 x64w_Result x64w_adc_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 4, 0x81, 2,    0); }
@@ -1315,10 +1319,10 @@ x64w_Result x64w_adc_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i) { return in
 x64w_Result x64w_adc_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 2,  OSO); }
 x64w_Result x64w_adc_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 2,    0); }
 x64w_Result x64w_adc_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 2, REXW); }
-x64w_Result x64w_adc_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s) { return instr_rm(c, s.i,   d, 1, 0x10,        0); }
-x64w_Result x64w_adc_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s) { return instr_rm(c, s.i,   d, 2, 0x11,      OSO); }
-x64w_Result x64w_adc_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s) { return instr_rm(c, s.i,   d, 4, 0x11,        0); }
-x64w_Result x64w_adc_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s) { return instr_rm(c, s.i,   d, 8, 0x11,     REXW); }
+x64w_Result x64w_adc_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s) { return instr_rm(c, s.i,   d, 1, 0x10,       0); }
+x64w_Result x64w_adc_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s) { return instr_rm(c, s.i,   d, 2, 0x11,     OSO); }
+x64w_Result x64w_adc_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s) { return instr_rm(c, s.i,   d, 4, 0x11,       0); }
+x64w_Result x64w_adc_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s) { return instr_rm(c, s.i,   d, 8, 0x11,    REXW); }
 x64w_Result x64w_add_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x80, 0,    0); }
 x64w_Result x64w_add_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i) { return instr_ri(c, r.i,   i, 2, 0x81, 0,  OSO); }
 x64w_Result x64w_add_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i) { return instr_ri(c, r.i,   i, 4, 0x81, 0,    0); }
@@ -1326,14 +1330,14 @@ x64w_Result x64w_add_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i) { return in
 x64w_Result x64w_add_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 0,  OSO); }
 x64w_Result x64w_add_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 0,    0); }
 x64w_Result x64w_add_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 0, REXW); }
-x64w_Result x64w_add_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s) { return instr_rr(c, d.i, s.i, 1, 0x02,        0); }
-x64w_Result x64w_add_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s) { return instr_rr(c, d.i, s.i, 2, 0x03,      OSO); }
-x64w_Result x64w_add_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s) { return instr_rr(c, d.i, s.i, 4, 0x03,        0); }
-x64w_Result x64w_add_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s) { return instr_rr(c, d.i, s.i, 8, 0x03,     REXW); }
-x64w_Result x64w_add_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 1, 0x02,        0); }
-x64w_Result x64w_add_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 2, 0x03,      OSO); }
-x64w_Result x64w_add_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 4, 0x03,        0); }
-x64w_Result x64w_add_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 8, 0x03,     REXW); }
+x64w_Result x64w_add_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s) { return instr_rr(c, d.i, s.i, 1, 0x02,       0); }
+x64w_Result x64w_add_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s) { return instr_rr(c, d.i, s.i, 2, 0x03,     OSO); }
+x64w_Result x64w_add_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s) { return instr_rr(c, d.i, s.i, 4, 0x03,       0); }
+x64w_Result x64w_add_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s) { return instr_rr(c, d.i, s.i, 8, 0x03,    REXW); }
+x64w_Result x64w_add_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 1, 0x02,       0); }
+x64w_Result x64w_add_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 2, 0x03,     OSO); }
+x64w_Result x64w_add_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 4, 0x03,       0); }
+x64w_Result x64w_add_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 8, 0x03,    REXW); }
 x64w_Result x64w_add_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i) { return instr_mi(c,   m,   i, 1, 0x80, 0,    0); }
 x64w_Result x64w_add_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i) { return instr_mi(c,   m,   i, 2, 0x81, 0,  OSO); }
 x64w_Result x64w_add_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 4, 0x81, 0,    0); }
@@ -1341,10 +1345,10 @@ x64w_Result x64w_add_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i) { return in
 x64w_Result x64w_add_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 0,  OSO); }
 x64w_Result x64w_add_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 0,    0); }
 x64w_Result x64w_add_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 0, REXW); }
-x64w_Result x64w_add_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s) { return instr_rm(c, s.i,   d, 1, 0x00,        0); }
-x64w_Result x64w_add_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s) { return instr_rm(c, s.i,   d, 2, 0x01,      OSO); }
-x64w_Result x64w_add_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s) { return instr_rm(c, s.i,   d, 4, 0x01,        0); }
-x64w_Result x64w_add_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s) { return instr_rm(c, s.i,   d, 8, 0x01,     REXW); }
+x64w_Result x64w_add_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s) { return instr_rm(c, s.i,   d, 1, 0x00,       0); }
+x64w_Result x64w_add_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s) { return instr_rm(c, s.i,   d, 2, 0x01,     OSO); }
+x64w_Result x64w_add_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s) { return instr_rm(c, s.i,   d, 4, 0x01,       0); }
+x64w_Result x64w_add_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s) { return instr_rm(c, s.i,   d, 8, 0x01,    REXW); }
 x64w_Result x64w_xor_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x80, 6,    0); }
 x64w_Result x64w_xor_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i) { return instr_ri(c, r.i,   i, 2, 0x81, 6,  OSO); }
 x64w_Result x64w_xor_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i) { return instr_ri(c, r.i,   i, 4, 0x81, 6,    0); }
@@ -1352,14 +1356,14 @@ x64w_Result x64w_xor_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i) { return in
 x64w_Result x64w_xor_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 6,  OSO); }
 x64w_Result x64w_xor_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 6,    0); }
 x64w_Result x64w_xor_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 6, REXW); }
-x64w_Result x64w_xor_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s) { return instr_rr(c, d.i, s.i, 1, 0x32,        0); }
-x64w_Result x64w_xor_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s) { return instr_rr(c, d.i, s.i, 2, 0x33,      OSO); }
-x64w_Result x64w_xor_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s) { return instr_rr(c, d.i, s.i, 4, 0x33,        0); }
-x64w_Result x64w_xor_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s) { return instr_rr(c, d.i, s.i, 8, 0x33,     REXW); }
-x64w_Result x64w_xor_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 1, 0x32,        0); }
-x64w_Result x64w_xor_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 2, 0x33,      OSO); }
-x64w_Result x64w_xor_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 4, 0x33,        0); }
-x64w_Result x64w_xor_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 8, 0x33,     REXW); }
+x64w_Result x64w_xor_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s) { return instr_rr(c, d.i, s.i, 1, 0x32,       0); }
+x64w_Result x64w_xor_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s) { return instr_rr(c, d.i, s.i, 2, 0x33,     OSO); }
+x64w_Result x64w_xor_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s) { return instr_rr(c, d.i, s.i, 4, 0x33,       0); }
+x64w_Result x64w_xor_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s) { return instr_rr(c, d.i, s.i, 8, 0x33,    REXW); }
+x64w_Result x64w_xor_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 1, 0x32,       0); }
+x64w_Result x64w_xor_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 2, 0x33,     OSO); }
+x64w_Result x64w_xor_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 4, 0x33,       0); }
+x64w_Result x64w_xor_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 8, 0x33,    REXW); }
 x64w_Result x64w_xor_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i) { return instr_mi(c,   m,   i, 1, 0x80, 6,    0); }
 x64w_Result x64w_xor_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i) { return instr_mi(c,   m,   i, 2, 0x81, 6,  OSO); }
 x64w_Result x64w_xor_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 4, 0x81, 6,    0); }
@@ -1367,10 +1371,10 @@ x64w_Result x64w_xor_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i) { return in
 x64w_Result x64w_xor_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 6,  OSO); }
 x64w_Result x64w_xor_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 6,    0); }
 x64w_Result x64w_xor_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 6, REXW); }
-x64w_Result x64w_xor_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s) { return instr_rm(c, s.i,   d, 1, 0x30,        0); }
-x64w_Result x64w_xor_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s) { return instr_rm(c, s.i,   d, 2, 0x31,      OSO); }
-x64w_Result x64w_xor_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s) { return instr_rm(c, s.i,   d, 4, 0x31,        0); }
-x64w_Result x64w_xor_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s) { return instr_rm(c, s.i,   d, 8, 0x31,     REXW); }
+x64w_Result x64w_xor_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s) { return instr_rm(c, s.i,   d, 1, 0x30,       0); }
+x64w_Result x64w_xor_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s) { return instr_rm(c, s.i,   d, 2, 0x31,     OSO); }
+x64w_Result x64w_xor_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s) { return instr_rm(c, s.i,   d, 4, 0x31,       0); }
+x64w_Result x64w_xor_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s) { return instr_rm(c, s.i,   d, 8, 0x31,    REXW); }
 x64w_Result x64w_and_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x80, 4,    0); }
 x64w_Result x64w_and_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i) { return instr_ri(c, r.i,   i, 2, 0x81, 4,  OSO); }
 x64w_Result x64w_and_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i) { return instr_ri(c, r.i,   i, 4, 0x81, 4,    0); }
@@ -1378,14 +1382,14 @@ x64w_Result x64w_and_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i) { return in
 x64w_Result x64w_and_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 4,  OSO); }
 x64w_Result x64w_and_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 4,    0); }
 x64w_Result x64w_and_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 4, REXW); }
-x64w_Result x64w_and_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s) { return instr_rr(c, d.i, s.i, 1, 0x22,        0); }
-x64w_Result x64w_and_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s) { return instr_rr(c, d.i, s.i, 2, 0x23,      OSO); }
-x64w_Result x64w_and_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s) { return instr_rr(c, d.i, s.i, 4, 0x23,        0); }
-x64w_Result x64w_and_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s) { return instr_rr(c, d.i, s.i, 8, 0x23,     REXW); }
-x64w_Result x64w_and_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 1, 0x22,        0); }
-x64w_Result x64w_and_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 2, 0x23,      OSO); }
-x64w_Result x64w_and_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 4, 0x23,        0); }
-x64w_Result x64w_and_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 8, 0x23,     REXW); }
+x64w_Result x64w_and_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s) { return instr_rr(c, d.i, s.i, 1, 0x22,       0); }
+x64w_Result x64w_and_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s) { return instr_rr(c, d.i, s.i, 2, 0x23,     OSO); }
+x64w_Result x64w_and_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s) { return instr_rr(c, d.i, s.i, 4, 0x23,       0); }
+x64w_Result x64w_and_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s) { return instr_rr(c, d.i, s.i, 8, 0x23,    REXW); }
+x64w_Result x64w_and_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 1, 0x22,       0); }
+x64w_Result x64w_and_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 2, 0x23,     OSO); }
+x64w_Result x64w_and_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 4, 0x23,       0); }
+x64w_Result x64w_and_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 8, 0x23,    REXW); }
 x64w_Result x64w_and_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i) { return instr_mi(c,   m,   i, 1, 0x80, 4,    0); }
 x64w_Result x64w_and_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i) { return instr_mi(c,   m,   i, 2, 0x81, 4,  OSO); }
 x64w_Result x64w_and_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 4, 0x81, 4,    0); }
@@ -1393,10 +1397,10 @@ x64w_Result x64w_and_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i) { return in
 x64w_Result x64w_and_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 4,  OSO); }
 x64w_Result x64w_and_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 4,    0); }
 x64w_Result x64w_and_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 4, REXW); }
-x64w_Result x64w_and_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s) { return instr_rm(c, s.i,   d, 1, 0x20,        0); }
-x64w_Result x64w_and_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s) { return instr_rm(c, s.i,   d, 2, 0x21,      OSO); }
-x64w_Result x64w_and_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s) { return instr_rm(c, s.i,   d, 4, 0x21,        0); }
-x64w_Result x64w_and_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s) { return instr_rm(c, s.i,   d, 8, 0x21,     REXW); }
+x64w_Result x64w_and_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s) { return instr_rm(c, s.i,   d, 1, 0x20,       0); }
+x64w_Result x64w_and_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s) { return instr_rm(c, s.i,   d, 2, 0x21,     OSO); }
+x64w_Result x64w_and_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s) { return instr_rm(c, s.i,   d, 4, 0x21,       0); }
+x64w_Result x64w_and_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s) { return instr_rm(c, s.i,   d, 8, 0x21,    REXW); }
 x64w_Result x64w_or_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x80, 1,    0); }
 x64w_Result x64w_or_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i) { return instr_ri(c, r.i,   i, 2, 0x81, 1,  OSO); }
 x64w_Result x64w_or_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i) { return instr_ri(c, r.i,   i, 4, 0x81, 1,    0); }
@@ -1404,14 +1408,14 @@ x64w_Result x64w_or_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i) { return ins
 x64w_Result x64w_or_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 1,  OSO); }
 x64w_Result x64w_or_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 1,    0); }
 x64w_Result x64w_or_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 1, REXW); }
-x64w_Result x64w_or_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s) { return instr_rr(c, d.i, s.i, 1, 0x0a,        0); }
-x64w_Result x64w_or_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s) { return instr_rr(c, d.i, s.i, 2, 0x0b,      OSO); }
-x64w_Result x64w_or_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s) { return instr_rr(c, d.i, s.i, 4, 0x0b,        0); }
-x64w_Result x64w_or_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s) { return instr_rr(c, d.i, s.i, 8, 0x0b,     REXW); }
-x64w_Result x64w_or_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 1, 0x0a,        0); }
-x64w_Result x64w_or_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 2, 0x0b,      OSO); }
-x64w_Result x64w_or_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 4, 0x0b,        0); }
-x64w_Result x64w_or_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 8, 0x0b,     REXW); }
+x64w_Result x64w_or_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s) { return instr_rr(c, d.i, s.i, 1, 0x0a,       0); }
+x64w_Result x64w_or_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s) { return instr_rr(c, d.i, s.i, 2, 0x0b,     OSO); }
+x64w_Result x64w_or_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s) { return instr_rr(c, d.i, s.i, 4, 0x0b,       0); }
+x64w_Result x64w_or_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s) { return instr_rr(c, d.i, s.i, 8, 0x0b,    REXW); }
+x64w_Result x64w_or_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 1, 0x0a,       0); }
+x64w_Result x64w_or_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 2, 0x0b,     OSO); }
+x64w_Result x64w_or_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 4, 0x0b,       0); }
+x64w_Result x64w_or_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 8, 0x0b,    REXW); }
 x64w_Result x64w_or_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i) { return instr_mi(c,   m,   i, 1, 0x80, 1,    0); }
 x64w_Result x64w_or_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i) { return instr_mi(c,   m,   i, 2, 0x81, 1,  OSO); }
 x64w_Result x64w_or_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 4, 0x81, 1,    0); }
@@ -1419,10 +1423,10 @@ x64w_Result x64w_or_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i) { return ins
 x64w_Result x64w_or_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 1,  OSO); }
 x64w_Result x64w_or_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 1,    0); }
 x64w_Result x64w_or_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 1, REXW); }
-x64w_Result x64w_or_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s) { return instr_rm(c, s.i,   d, 1, 0x08,        0); }
-x64w_Result x64w_or_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s) { return instr_rm(c, s.i,   d, 2, 0x09,      OSO); }
-x64w_Result x64w_or_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s) { return instr_rm(c, s.i,   d, 4, 0x09,        0); }
-x64w_Result x64w_or_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s) { return instr_rm(c, s.i,   d, 8, 0x09,     REXW); }
+x64w_Result x64w_or_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s) { return instr_rm(c, s.i,   d, 1, 0x08,       0); }
+x64w_Result x64w_or_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s) { return instr_rm(c, s.i,   d, 2, 0x09,     OSO); }
+x64w_Result x64w_or_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s) { return instr_rm(c, s.i,   d, 4, 0x09,       0); }
+x64w_Result x64w_or_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s) { return instr_rm(c, s.i,   d, 8, 0x09,    REXW); }
 x64w_Result x64w_sub_ri8   (uint8_t **c, x64w_Gpr8  r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x80, 5,    0); }
 x64w_Result x64w_sub_ri16  (uint8_t **c, x64w_Gpr16 r, int16_t    i) { return instr_ri(c, r.i,   i, 2, 0x81, 5,  OSO); }
 x64w_Result x64w_sub_ri32  (uint8_t **c, x64w_Gpr32 r, int32_t    i) { return instr_ri(c, r.i,   i, 4, 0x81, 5,    0); }
@@ -1430,14 +1434,14 @@ x64w_Result x64w_sub_r64i32(uint8_t **c, x64w_Gpr64 r, int32_t    i) { return in
 x64w_Result x64w_sub_r16i8 (uint8_t **c, x64w_Gpr16 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 5,  OSO); }
 x64w_Result x64w_sub_r32i8 (uint8_t **c, x64w_Gpr32 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 5,    0); }
 x64w_Result x64w_sub_r64i8 (uint8_t **c, x64w_Gpr64 r, int8_t     i) { return instr_ri(c, r.i,   i, 1, 0x83, 5, REXW); }
-x64w_Result x64w_sub_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s) { return instr_rr(c, d.i, s.i, 1, 0x2a,        0); }
-x64w_Result x64w_sub_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s) { return instr_rr(c, d.i, s.i, 2, 0x2b,      OSO); }
-x64w_Result x64w_sub_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s) { return instr_rr(c, d.i, s.i, 4, 0x2b,        0); }
-x64w_Result x64w_sub_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s) { return instr_rr(c, d.i, s.i, 8, 0x2b,     REXW); }
-x64w_Result x64w_sub_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 1, 0x2a,        0); }
-x64w_Result x64w_sub_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 2, 0x2b,      OSO); }
-x64w_Result x64w_sub_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 4, 0x2b,        0); }
-x64w_Result x64w_sub_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 8, 0x2b,     REXW); }
+x64w_Result x64w_sub_rr8   (uint8_t **c, x64w_Gpr8  d, x64w_Gpr8  s) { return instr_rr(c, d.i, s.i, 1, 0x2a,       0); }
+x64w_Result x64w_sub_rr16  (uint8_t **c, x64w_Gpr16 d, x64w_Gpr16 s) { return instr_rr(c, d.i, s.i, 2, 0x2b,     OSO); }
+x64w_Result x64w_sub_rr32  (uint8_t **c, x64w_Gpr32 d, x64w_Gpr32 s) { return instr_rr(c, d.i, s.i, 4, 0x2b,       0); }
+x64w_Result x64w_sub_rr64  (uint8_t **c, x64w_Gpr64 d, x64w_Gpr64 s) { return instr_rr(c, d.i, s.i, 8, 0x2b,    REXW); }
+x64w_Result x64w_sub_rm8   (uint8_t **c, x64w_Gpr8  d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 1, 0x2a,       0); }
+x64w_Result x64w_sub_rm16  (uint8_t **c, x64w_Gpr16 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 2, 0x2b,     OSO); }
+x64w_Result x64w_sub_rm32  (uint8_t **c, x64w_Gpr32 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 4, 0x2b,       0); }
+x64w_Result x64w_sub_rm64  (uint8_t **c, x64w_Gpr64 d, x64w_Mem   s) { return instr_rm(c, d.i,   s, 8, 0x2b,    REXW); }
 x64w_Result x64w_sub_mi8   (uint8_t **c, x64w_Mem   m, int8_t     i) { return instr_mi(c,   m,   i, 1, 0x80, 5,    0); }
 x64w_Result x64w_sub_mi16  (uint8_t **c, x64w_Mem   m, int16_t    i) { return instr_mi(c,   m,   i, 2, 0x81, 5,  OSO); }
 x64w_Result x64w_sub_mi32  (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 4, 0x81, 5,    0); }
@@ -1445,10 +1449,10 @@ x64w_Result x64w_sub_m64i32(uint8_t **c, x64w_Mem   m, int32_t    i) { return in
 x64w_Result x64w_sub_m16i8 (uint8_t **c, x64w_Mem   m, int16_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 5,  OSO); }
 x64w_Result x64w_sub_m32i8 (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 5,    0); }
 x64w_Result x64w_sub_m64i8 (uint8_t **c, x64w_Mem   m, int32_t    i) { return instr_mi(c,   m,   i, 1, 0x83, 5, REXW); }
-x64w_Result x64w_sub_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s) { return instr_rm(c, s.i,   d, 1, 0x28,        0); }
-x64w_Result x64w_sub_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s) { return instr_rm(c, s.i,   d, 2, 0x29,      OSO); }
-x64w_Result x64w_sub_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s) { return instr_rm(c, s.i,   d, 4, 0x29,        0); }
-x64w_Result x64w_sub_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s) { return instr_rm(c, s.i,   d, 8, 0x29,     REXW); }
+x64w_Result x64w_sub_mr8   (uint8_t **c, x64w_Mem   d, x64w_Gpr8  s) { return instr_rm(c, s.i,   d, 1, 0x28,       0); }
+x64w_Result x64w_sub_mr16  (uint8_t **c, x64w_Mem   d, x64w_Gpr16 s) { return instr_rm(c, s.i,   d, 2, 0x29,     OSO); }
+x64w_Result x64w_sub_mr32  (uint8_t **c, x64w_Mem   d, x64w_Gpr32 s) { return instr_rm(c, s.i,   d, 4, 0x29,       0); }
+x64w_Result x64w_sub_mr64  (uint8_t **c, x64w_Mem   d, x64w_Gpr64 s) { return instr_rm(c, s.i,   d, 8, 0x29,    REXW); }
 x64w_Result x64w_inc_r8 (uint8_t **c, x64w_Gpr8  d) { return instr_r(c, d.i, 1, 0xfe, 0,    0); }
 x64w_Result x64w_inc_r16(uint8_t **c, x64w_Gpr16 d) { return instr_r(c, d.i, 2, 0xff, 0,  OSO); }
 x64w_Result x64w_inc_r32(uint8_t **c, x64w_Gpr32 d) { return instr_r(c, d.i, 4, 0xff, 0,    0); }
