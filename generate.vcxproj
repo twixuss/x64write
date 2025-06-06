@@ -17,10 +17,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{bf9d23da-774d-40f8-8976-2bf4b74e5c36}</ProjectGuid>
-    <RootNamespace>x64w</RootNamespace>
+    <ProjectGuid>{F5054F07-F83D-49E3-8ED0-3DDDD85E314F}</ProjectGuid>
+    <RootNamespace>generate</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
-    <ProjectName>x64w</ProjectName>
+    <ProjectName>generate</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -94,7 +94,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="test_dumpbin.cpp" />
+    <ClCompile Include="generate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="vs\Common.props" />
@@ -103,6 +103,7 @@
     <None Include="vs\Release.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="common.h" />
     <ClInclude Include="x64write.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

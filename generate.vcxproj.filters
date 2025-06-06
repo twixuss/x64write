@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="test_dumpbin.cpp" />
+    <ClCompile Include="generate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="vs\Common.props" />
@@ -11,5 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="x64write.h" />
+    <ClInclude Include="common.h" />
   </ItemGroup>
 </Project>
